@@ -1,19 +1,27 @@
+/*
+for given positive number a,
+use newton's method to compute x,
+so that x^2 = a;
+*/
 #include <iostream>
 #include <cstdio>
 using namespace std;
 
+// control precision
 #define ESP 0.001
 
-int main(){
+int main()
+{
     unsigned long long a;
     printf("please input number a to compute root for:\n");
     scanf("%llu", &a);
-    double a_half = (double)a/2;
-    double x_cur = a/2, x_prev;
-    do {
+    double a_half = (double)a / 2;
+    double x_cur = a / 2, x_prev;
+    do
+    {
         x_prev = x_cur;
-        x_cur = x_prev/2 + a_half/x_prev;
-    } while (x_prev-x_cur > ESP || x_cur - x_prev > ESP);
+        x_cur = x_prev / 2 + a_half / x_prev;
+    } while (x_prev - x_cur > ESP || x_cur - x_prev > ESP);
     printf("root for %llu is %.3f\n", a, x_cur);
     return 0;
 }

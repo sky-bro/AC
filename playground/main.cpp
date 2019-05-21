@@ -3,9 +3,10 @@
 using namespace std;
 
 int main(){
-    int a = 2.2;
-    double b = 2.3;
-    scanf("%d%lf", &a, &b);
-    printf("%lu:%.1f", sizeof a, b);
+    freopen("/home/sky-ubt/Coding/cpp/AC/playground/test/test01.txt", "r", stdin);
+    int a, b;
+    while(scanf("%d%d", &a, &b)==2){
+        printf("%d\n", a+b);
+    }
     return 0;
 }
