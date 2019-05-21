@@ -3,4 +3,5 @@
   * [如何通俗易懂地讲解牛顿迭代法？](<https://blog.csdn.net/ccnt_2012/article/details/81837154>)
 * [最佳兄弟数](./best-brother-pair/README.md)
 * [求不大于n的全部质数](./prime-within-n/README.md)
+* [计算星期几](./day-of-week/README.md)
 ## 其他工具
