@@ -5,6 +5,7 @@
 * [求不大于n的全部质数](./prime-within-n/README.md)
 * [计算星期几](./day-of-week/README.md)
 * [strtok实现](./strtok/README.md)
+* [排序](./sort/README.md)
 ## 其他工具
 
 ## 记忆

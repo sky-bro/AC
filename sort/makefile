@@ -1,4 +1,4 @@
 all:
 	-rm build -r
 	mkdir build/bin -p
-	g++ *.cpp -O0 -o build/bin/main
+	g++ *.cpp -o build/bin/main

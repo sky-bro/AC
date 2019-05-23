@@ -33,14 +33,14 @@ void printArr(char a[], int n){
 int main()
 {
     // freopen("/home/sky-ubt/Coding/cpp/AC/playground/test/test01.txt", "r", stdin);
-    char str[20] = "1, 2 ,3,4,5,6";
-    int len = strlen(str);
-    char *p = strtok(str, ", ");
-    do
+    int a = 3;
     {
-        printf("%s\n", p);
-        printArr(str, len+1);
-    } while (p = strtok(nullptr, ", "));
+        int b = 4;
+        printf("%p\n", &b);
+    }
+    int b;
+    printf("%p\n", &b);
+    printf("%x\n", b);
 
     return 0;
 }
