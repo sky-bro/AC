@@ -13,8 +13,26 @@
 * strupr(char []) not in standard c library
 * strlwr(char [])
 * strcat(char * dest, char * str)
-* strchr
+* strchr 查找首次出现字符的位置
 * strrchr
 * atoi
 * atof
 * itoa (windows)
+* freopen
+* stricmp (..)
+* binary_search 找到返回true
+* lower_bound 大于等于最小的（指针）
+* upper_bound 大于最小的（指针）
+* pair<T1, T2>
+* multiset 
+  * lower_bound 大于等于最小
+  * upper_bound 小于等于最大
+  * find
+  * erase
+  * insert
+* set
+  * 不能有重复元素
+* multimap
+* map
+  * 关键字不相等
+  * 可以用[]

@@ -1,3 +1,8 @@
+/**
+ *  求n以内的所有素数
+ *  利用对于每个小于n的i，只用看3~sqrt(i)就好了
+ *  这里的i当然从3开始，每次增加2
+ */
 #include <iostream>
 #include <cstdio>
 using namespace std;
