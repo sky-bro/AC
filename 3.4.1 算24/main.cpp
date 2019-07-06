@@ -48,11 +48,9 @@ bool count24(int num[], int n){
                 new_num[k] = num[j] / num[i];
                 if (count24(new_num, n-1)) return true;
             }
-
-            return false;
-            
         }
     }
+    return false;
 }
 
 int main(int argc, const char** argv) {
