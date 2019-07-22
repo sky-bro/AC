@@ -36,3 +36,6 @@
 * map
   * 关键字不相等
   * 可以用[]
+* max_element
+* sort
+* partition
