@@ -39,3 +39,4 @@
 * max_element
 * sort
 * partition
+* memset
