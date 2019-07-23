@@ -21,8 +21,8 @@
 * freopen
 * stricmp (..)
 * binary_search 找到返回true
-* lower_bound 大于等于最小的（指针）
-* upper_bound 大于最小的（指针）
+* lower_bound 大于等于x（指针）
+* upper_bound 大于x（指针）
 * pair<T1, T2>
 * multiset 
   * lower_bound 大于等于最小
