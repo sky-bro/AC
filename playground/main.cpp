@@ -33,14 +33,7 @@ void printArr(char a[], int n){
 int main()
 {
     // freopen("/home/sky-ubt/Coding/cpp/AC/playground/test/test01.txt", "r", stdin);
-    int a = 3;
-    {
-        int b = 4;
-        printf("%p\n", &b);
-    }
-    int b;
-    printf("%p\n", &b);
-    printf("%x\n", b);
+    int a[2];
 
     return 0;
 }
