@@ -1,3 +1,4 @@
+// 百练 2757:最长上升子序列
 #include <iostream>
 
 using namespace std;
@@ -9,7 +10,8 @@ int LSS(int a[], int n){
         b[i] = 1;
     }
     for (int i = 1; i < n; ++i){
-        for (int j = 0; j < i; ++j){
+        for (int j = i-1; j >= 0; --j){
+            if (j + 1 < b[i]) break;
             if (a[j] < a[i]){
                 if (b[j] + 1 > b[i]) {
                     b[i] = b[j] + 1;
@@ -18,7 +20,8 @@ int LSS(int a[], int n){
         }
     }
     int result = 1;
-    for (int i = 2; i < n; ++i) {
+    for (int i = n-1; i >= 1; --i) {
+        if (i + 1 < result) break;
         if (b[i] > result) result = b[i];
     }
     delete [] b;
