@@ -1,3 +1,4 @@
+// 可以用滚动数组
 #include <iostream>
 
 using namespace std;
