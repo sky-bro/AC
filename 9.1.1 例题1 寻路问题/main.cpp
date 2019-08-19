@@ -38,7 +38,7 @@ void dfs(int s) {
   }
   for (int i = 0; i < G[s].size(); ++i) {
     Road r = G[s][i];
-    if (!visited[r.d] && totalCost + r.t < K && minLen < totalLen + r.L) {
+    if (!visited[r.d] && totalCost + r.t < K && minLen > totalLen + r.L) {
       if (totalLen + r.L >= minL[r.d][totalCost + r.t]) continue;
       minL[r.d][totalCost+r.t] = totalLen + r.L;
       totalLen += r.L;
