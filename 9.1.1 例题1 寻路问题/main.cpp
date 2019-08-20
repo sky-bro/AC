@@ -11,6 +11,9 @@
 5 4 3 2
 */
 
+// POJ 1724
+// 500ms, to be optimized
+
 #include <iostream>
 #include <vector>
 #include <cstring>
@@ -38,7 +41,7 @@ void dfs(int s) {
   }
   for (int i = 0; i < G[s].size(); ++i) {
     Road r = G[s][i];
-    if (!visited[r.d] && totalCost + r.t < K && minLen > totalLen + r.L) {
+    if (!visited[r.d] && totalCost + r.t <= K && minLen > totalLen + r.L) {
       if (totalLen + r.L >= minL[r.d][totalCost + r.t]) continue;
       minL[r.d][totalCost+r.t] = totalLen + r.L;
       totalLen += r.L;
@@ -73,6 +76,6 @@ int main(int argc, char const *argv[])
       minL[i][j] = 1 << 30;
   dfs(1);
   if (minLen < 1 << 30) cout<< minLen <<endl;
-  else cout<<-1<<endl;
+  else cout<<"-1"<<endl;
   return 0;
 }
