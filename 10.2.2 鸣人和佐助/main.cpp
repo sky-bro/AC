@@ -15,86 +15,27 @@ struct Node
 
 queue<Node> q;
 
-char matrix[200][200];
-bool visited[200][200];
+bool matrix[200][200];
+int energy_took[200][200];
 
-int bfs(int startX, int startY) {
+int bfs(int startX, int startY, int endX, int endY) {
   Node start(startX, startY, 0, 0);
-  visited[startX][startY] = true;
+  energy_took[startX][startY] = 0;
+  int x_diff[4] = {-1, 1, 0, 0};
+  int y_diff[4] = {0, 0, -1, 1};
   q.push(start);
   while (!q.empty()) {
     Node node = q.front(); q.pop();
-
-    if (node.x - 1 >= 0 && !visited[node.x-1][node.y]) {
-      switch (matrix[node.x-1][node.y])
-      {
-      case '*':
-        q.push(Node(node.x-1, node.y, node.t, node.s+1));
-        visited[node.x-1][node.y] = true;
-        break;
-      case '#':
-        if (node.t + 1 <= T) {
-          q.push(Node(node.x-1, node.y, node.t+1, node.s+1));
-          visited[node.x-1][node.y] = true;
+    for (int i = 0; i < 4; ++i) {
+      int x = node.x + x_diff[i];
+      int y = node.y + y_diff[i];
+      if (x >= 0 && x < M && y >=0 && y < N ){
+        int t = node.t + matrix[x][y];
+        if (energy_took[x][y] > t && t <= T) {
+          if (x == endX && y == endY) return node.s+1;
+          q.push(Node(x, y, t, node.s+1));
+          energy_took[x][y] = t;
         }
-        break;
-      case '+':
-        return node.s + 1;
-        break;
-      }
-    }
-    if (node.x + 1 < M && !visited[node.x+1][node.y]) {
-      switch (matrix[node.x+1][node.y])
-      {
-      case '*':
-        q.push(Node(node.x+1, node.y, node.t, node.s+1));
-        visited[node.x+1][node.y] = true;
-        break;
-      case '#':
-        if (node.t + 1 <= T) {
-          q.push(Node(node.x+1, node.y, node.t+1, node.s+1));
-          visited[node.x+1][node.y] = true;
-        }
-        break;
-      case '+':
-        return node.s + 1;
-        break;
-      }
-    }
-    if (node.y - 1 >= 0 && !visited[node.x][node.y-1]) {
-      switch (matrix[node.x][node.y-1])
-      {
-      case '*':
-        q.push(Node(node.x, node.y-1, node.t, node.s+1));
-        visited[node.x][node.y-1] = true;
-        break;
-      case '#':
-        if (node.t + 1 <= T) {
-          q.push(Node(node.x, node.y-1, node.t+1, node.s+1));
-          visited[node.x][node.y-1] = true;
-        }
-        break;
-      case '+':
-        return node.s + 1;
-        break;
-      }
-    }
-    if (node.y + 1 < N && !visited[node.x][node.y+1]) {
-      switch (matrix[node.x][node.y+1])
-      {
-      case '*':
-        q.push(Node(node.x, node.y+1, node.t, node.s+1));
-        visited[node.x][node.y+1] = true;
-        break;
-      case '#':
-        if (node.t + 1 <= T) {
-          q.push(Node(node.x, node.y+1, node.t+1, node.s+1));
-          visited[node.x][node.y+1] = true;
-        }
-        break;
-      case '+':
-        return node.s + 1;
-        break;
       }
     }
   }
@@ -105,16 +46,15 @@ int main(int argc, char const *argv[])
 {
   cin>>M>>N>>T;
   int mingrenX, mingrenY, zuozhuX, zuozhuY;
-  // char tmp;
+  char tmp;
   for (int i = 0; i < M; ++i) {
     for (int j = 0; j < N; ++j) {
-      cin>>matrix[i][j];
-      if (matrix[i][j] == '@') {
-        mingrenX = i;
-        mingrenY = j;
-      }
+      cin>>tmp; matrix[i][j] = false; energy_took[i][j] = T+1;
+      if (tmp == '@') {mingrenX = i; mingrenY = j;}
+      else if (tmp == '#') {matrix[i][j]=true;}
+      else if (tmp == '+')  {zuozhuX = i; zuozhuY = j;}
     }
   }
-  cout<<bfs(mingrenX, mingrenY)<<endl;
+  cout<<bfs(mingrenX, mingrenY, zuozhuX, zuozhuY)<<endl;
   return 0;
 }
