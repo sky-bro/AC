@@ -8,6 +8,11 @@
 * [排序](./sort/README.md)
 ## 其他工具
 
+## 算法&数据结构
+
+* (逆)康托展开
+* 线段树
+
 ## 记忆
 
 * strupr(char []) not in standard c library
@@ -40,7 +45,10 @@
 * sort
 * partition
 * memset
+---
+* double间的比较要通过比较差值是否达到精度要求
 
 ## ToDos
 
 * 9.1.1 took 500ms, To Be Optimized
+* 10.3.1 其它实现[POJ1077 HDU1043 Eight 八数码第四境界 双向广搜 康托展开 逆康托](https://blog.csdn.net/Night_13/article/details/52751574)
