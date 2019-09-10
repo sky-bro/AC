@@ -11,8 +11,47 @@
 ## 算法&数据结构
 
 * [康托展开和逆康托展开](https://blog.csdn.net/wbin233/article/details/72998375)
+
 * 线段树
+
 * 优先队列
+
+* 计算星期几（[基姆拉尔森计算公式](https://blog.csdn.net/qq_40772692/article/details/80330346)）
+
+  * ```c++
+    int _day_of_week(int year, int month, int day=1) {
+      if (month == 1 || month == 2) {
+        --year;
+        month += 12;
+      }
+      // 0 -- Sunday 1 -- Monday
+      return (day + 2*month + 3*(month+1)/5 + year + year/4 - year/100 + year/400 + 1) % 7;
+    }
+    ```
+
+* 快速幂
+
+  * ```c++
+    template <typename T>
+    T pow(T x, int n) {
+      int ret = 1;
+      while (n) {
+        if (n & 1) { // 按位与比n%2更快
+          ret *= x;
+        }
+        x *= x;
+        n >>= 1;
+      }
+      return ret;
+    }
+    ```
+  
+  * 相关题目
+  
+    * [POJ NOI MATH-7831 计算星期几](http://noi.openjudge.cn/math/7831/) [POJ NOI MATH-7831 计算星期几](https://blog.csdn.net/tigerisland45/article/details/69055252)
+    * 
+  
+* 
 
 ## 记忆
 
