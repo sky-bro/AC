@@ -1,0 +1,7 @@
+a, b = input().split()
+a = int(a)
+b = int(b)
+c = int(a/b)
+d = a - (b*c)
+# print(a//b, a%b)
+print(c, d)
