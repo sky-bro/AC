@@ -87,6 +87,7 @@
 * memset
 ---
 * double间的比较要通过比较差值是否达到精度要求
+* 1e3 默认是double
 
 ## ToDos
 
