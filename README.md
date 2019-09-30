@@ -60,6 +60,7 @@
 * strcat(char * dest, char * str)
 * strchr 查找首次出现字符的位置
 * strrchr
+* strstr和str1.find(str2) (c++中string类型)
 * atoi
 * atof
 * itoa (windows)
@@ -85,10 +86,12 @@
 * sort
 * partition
 * memset
+* cctype
 ---
 * double间的比较要通过比较差值是否达到精度要求
 * 1e3 默认是double
 
 ## ToDos
 
-* 9.1.1 took 500ms, To Be Optimized
+- [ ] 9.1.1 took 500ms, To Be Optimized
+- [ ] 字符串匹配算法（判断是否为子串）[NOI/1.7编程基础之字符串/18:验证子串](http://noi.openjudge.cn/ch0107/18)
