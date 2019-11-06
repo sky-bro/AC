@@ -46,9 +46,11 @@ public:
         char c;
         int tmp_state_idx = 0;
         while ((c=fgetc(in)) != EOF) {
+            // tmp_state_idx保存当前的状态号，idx保存下一步的状态号
             int idx = g(tmp_state_idx, c);
-            if (idx == -1) {
+            while (idx == -1) {
                 idx = g(f(tmp_state_idx), c);
+                tmp_state_idx = idx;
             }
 
             if (outputs[idx].size() != 0){
@@ -124,9 +126,10 @@ AC::AC(map<string, int> & patterns)
                 outputs.push_back(vector<string>());
 
                 // 合并f(s)的output到s
-                for (vector<string>::iterator it = outputs[failures[state_idx]].begin();it != outputs[failures[state_idx]].end();it++){
-                    outputs[state_idx].push_back(*it);
-                }
+                outputs[state_idx].insert(outputs[state_idx].end(), outputs[failures[state_idx]].begin(), outputs[failures[state_idx]].end());
+                // for (vector<string>::iterator it = outputs[failures[state_idx]].begin();it != outputs[failures[state_idx]].end();it++){
+                //     outputs[state_idx].push_back(*it);
+                // }
             }
 
             if (it->second == depth+1){
