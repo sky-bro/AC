@@ -75,7 +75,8 @@ AC::AC(map<string, int> & patterns)
 
     // depth = 1 的部分
     for (map<string, int>::iterator it = patterns.begin(); it != patterns.end(); ++it) {
-        if (states[0].find(it->first[0]) == states[0].end()){
+        // if (states[0].find(it->first[0]) == states[0].end()){
+        if (g(0, it->first[0]) <= 0){
             // 没有已有的转移，则创建新的转移，转移到++state_idx
             states[0][it->first[0]] = ++state_idx;
 
@@ -109,7 +110,8 @@ AC::AC(map<string, int> & patterns)
                 idx = states[idx][it->first[i]];
             }
 
-            if (states[idx].find(it->first[depth]) == states[idx].end()){
+            // if (states[idx].find(it->first[depth]) == states[idx].end()){
+            if (g(idx, it->first[depth]) <= 0){
                 // 没有已有的转移，则创建新的转移，转移到++state_idx
                 states[idx][it->first[depth]] = ++state_idx;
 
