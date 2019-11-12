@@ -36,7 +36,7 @@ public:
     // pattern->pattern_len
     AC(map<string, int> & patterns);
     void update_patterns(map<string, int> & patterns);
-    ~AC();
+    ~AC(){}
 
     void print_AC_states() {
 
@@ -49,8 +49,8 @@ public:
             // tmp_state_idx保存当前的状态号，idx保存下一步的状态号
             int idx = g(tmp_state_idx, c);
             while (idx == -1) {
-                idx = g(f(tmp_state_idx), c);
-                tmp_state_idx = idx;
+                tmp_state_idx = f(tmp_state_idx);
+                idx = g(tmp_state_idx, c);
             }
 
             if (outputs[idx].size() != 0){
@@ -141,8 +141,4 @@ AC::AC(map<string, int> & patterns)
 
         }
     }
-}
-
-AC::~AC()
-{
 }
