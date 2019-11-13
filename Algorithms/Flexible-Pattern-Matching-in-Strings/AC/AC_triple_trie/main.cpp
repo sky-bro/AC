@@ -19,17 +19,18 @@ int main(int argc, char const *argv[])
     ifstream patterns_in;
     patterns_in.open("patterns.txt");
 
-    set<Pattern> patterns;
+    vector<Pattern> patterns;
 
     while (patterns_in.getline(buf, 256)) {
-        patterns.insert(Pattern(buf, strlen(buf)));
+        patterns.push_back(Pattern(buf, 0));
     }
 
     for (auto it = patterns.begin(); it != patterns.end(); it++) {
-        cout<<it->str<<it->len<<endl;
+        cout<<it->str<<it->idx<<endl;
     }
 
-    AC my_ac(patterns);
+    pair<int, vector<Pattern> > p0(0, patterns);
+    AC my_ac(p0);
     my_ac.start_match(in, stdout);
 
     fclose(in);
