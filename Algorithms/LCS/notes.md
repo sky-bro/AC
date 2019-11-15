@@ -175,11 +175,11 @@
 
 * 首先用"ABC"与"CBA"两个串进行测试，结果如下：最长公共子序列长为1，可能的序列有3个——"A"或"B"或"C"（上面是递归，下面是非递归）
 
-  ![test1](/home/sky/Coding/cpp/AC/Algorithms/LCS/images/test1.png)
+  ![test1](images/test1.png)
 
 * 再用一个稍复杂的两个串测试: "bdcaba"和"abcbdba"，结果如下：最长公共子序列长为4，可能的序列有2个——"bcba"或"bdba"（上面是递归，下面是非递归）
 
-  ![test2](/home/sky/Coding/cpp/AC/Algorithms/LCS/images/test2.png)
+  ![test2](images/test2.png)
 
 ## 总结
 
