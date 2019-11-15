@@ -75,7 +75,7 @@ int LCS2(const char *str1, int len1, const char *str2, int len2)
     return dp[len1][len2];
 }
 
-// 
+// 输出一个最长子序列
 void print_sequence(int len1, int len2)
 {
     if (len1 == 0 || len2 == 0)
