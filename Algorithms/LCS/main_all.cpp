@@ -25,6 +25,10 @@ int LCS(const char *str1, int len1, const char *str2, int len2)
 
     if (str1[len1 - 1] == str2[len2 - 1])
     {
+        // 这两行仅为输出所有最长公共子序列时需要，仅一个最长公共子序列不需要
+        dp[len1 - 1][len2] = LCS(str1, len1 - 1, str2, len2);
+        dp[len1][len2 - 1] = LCS(str1, len1, str2, len2 - 1);
+
         dp[len1 - 1][len2 - 1] = LCS(str1, len1 - 1, str2, len2 - 1);
         // 3表示左上
         result[len1][len2] = 3;
@@ -79,27 +83,8 @@ int LCS2(const char *str1, int len1, const char *str2, int len2)
     return dp[len1][len2];
 }
 
-// 
-void print_sequence(int len1, int len2)
-{
-    if (len1 == 0 || len2 == 0)
-        return;
-    switch (result[len1][len2])
-    {
-    case 1:
-        print_sequence(len1 - 1, len2);
-        break;
-    case 2:
-        print_sequence(len1, len2 - 1);
-        break;
-    case 3:
-        print_sequence(len1 - 1, len2 - 1);
-        cout << str1[len1 - 1];
-        break;
-    }
-}
-
-// 
+// 获取所有最长公共子序列
+// 测试 bdcaba abcbdba
 set<string> get_all_sequence(int len1, int len2)
 {
     set<string> s;
@@ -120,7 +105,7 @@ set<string> get_all_sequence(int len1, int len2)
     if (dp[len1][len2] == dp[len1-1][len2-1]) {
         set<string> tmp = get_all_sequence(len1-1, len2-1);
         s.insert(tmp.begin(), tmp.end());
-    } else if (dp[len1][len2] == dp[len1-1][len2-1] + 1) {
+    } else if (dp[len1][len2] == dp[len1-1][len2-1] + 1 && str1[len1-1]==str2[len2-1]) {
         set<string> tmp = get_all_sequence(len1-1, len2-1);
         buf[0] = str1[len1-1];
         string ss(buf);
@@ -128,7 +113,7 @@ set<string> get_all_sequence(int len1, int len2)
             s.insert(ss);
         } else {
             for (auto x: tmp) {
-                s.insert(ss + x);
+                s.insert(x+ss);
             }
         }
     }
