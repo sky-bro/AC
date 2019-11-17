@@ -34,7 +34,7 @@ $ ./main > out.txt
    
    *next
    0       1       3       5       6       7       4       8       9       0       0       0       2
-   next表占用: 9/13 0.769231
+   next表占用: 10/13 0.769231
    
    *check
    0       0       0       1       1       2       3       4       5       6
@@ -61,10 +61,10 @@ $ ./main > out.txt
    At index: 17:
            she he 
    At index: 32:
-           he
+           he 
    ```
 
-   ![simple start](simple_start.gif)
+   ![simple start](images/simple_start.gif)
 
 2. then I used vimtutor text
    * matched against these patterns:
@@ -82,4 +82,4 @@ $ ./main > out.txt
 
    * turn out to be alright:
 
-   ![test with vimtutor text](test_with_vimtutor_text.gif)
+   ![test with vimtutor text](images/test_with_vimtutor_text.gif)

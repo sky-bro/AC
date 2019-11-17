@@ -19,7 +19,6 @@ using namespace std;
 class Pattern {
 public:
     string str;
-    // 如果str.length()是直接获长度就不用这个Pattern了
     int idx;
     
     Pattern(string buffer, int index):str(buffer), idx(index) { }
@@ -49,7 +48,7 @@ private:
 
     // 转向函数goto
     int g(int s, int c) {
-        // ? 检查越界？
+        // 检查越界
         if (base.size() <= s) return -1;
         int t_idx = base[s]+c;
         if (t_idx<next.size() && check[next[t_idx]] == s) {
