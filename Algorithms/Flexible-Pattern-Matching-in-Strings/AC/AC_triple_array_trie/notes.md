@@ -1,7 +1,5 @@
 # AC算法 多模式匹配
 
-[TOC]
-
 ## 任务：基于双数组-AC算法
 
 1. 双数组-自动机的预处理：Next表、Base表、Check表、失效函数、输出函数构建（这里应该指的是<u>三数组</u>，双数组中Next表和Base表合为一个Base表）
@@ -27,21 +25,21 @@
   1. 三数组方式 (Johnson1975, Aho+1985)
 
      * 如下面这个转移
-  
-   * ![Tripple-Array Structure](images/tripple.gif)
-  
+     
+       ![Tripple-Array Structure](images/tripple.gif)
+     
      * ```c++
        // s状态遇到c字符转移到t状态 (正常情况，没有失败时)
        next[base[s] + c] = t; // next中存目的状态t
        check[base[s] + c] = s; // check中存源状态s
-     ```
-  
-   * 也就是意味着base数组大小等于状态数，next和check数组一样大。
-  
-   * base是用来辅助索引next中的元素(相当于一个基础偏移量)，check是用来检验转移是否正确，next是核心，指明转移到的状态
-  
+       ```
+     
+     * 也就是意味着base数组大小等于状态数，next和check数组一样大。
+     
+     * base是用来辅助索引next中的元素(相当于一个基础偏移量)，check是用来检验转移是否正确，next是核心，指明转移到的状态
+     
      * 所以用上三个表的一次转移就是
-  
+     
        ```c++
        t = base[s] + c;
        
@@ -50,30 +48,30 @@
        else
            fail... // 后面就会用失败函数进行转移
        ```
-  
+     
   2. 双数组方式 (Aoe1989)
-  
+
      * 还是s到t的这个转移
-     
+
      * ![Double-Array Structure](images/double.gif)
-     
+
      * ```c++
        // s状态遇到c字符转移到t状态 (正常情况，没有失败时)
        base[s] + c = t; // base与next数组合并为了一个base数组
        check[base[s] + c] = s; // check还是一样存源状态
        ```
-     
+
      * （我其实没懂）这时就意味着base和check一样大，我对base数组这儿有疑问：
-     
+
        * ```c++
          // 如果说2状态通过'a'转移到3状态，通过'c'转移到4状态，那么
          base[2] + 'a' = 3;
          base[2] + 'c' = 4;
          // 肯定是有问题的。。第一个式子等于3，那第二个肯定等于5了
          ```
-     
+
      * 转移和上面三数组方式类似
-     
+
        ```c++
        t = base[s] + c;
        
@@ -87,27 +85,27 @@
 
   ```c++
   void start_match(FILE *in, ostream &out) {
-          unsigned char_read = 0;
-          char c;
-          int s = 0, t;
-          while ((c=fgetc(in)) != EOF) {
-              ++char_read;
+      unsigned char_read = 0;
+      char c;
+      int s = 0, t;
+      while ((c=fgetc(in)) != EOF) {
+          ++char_read;
   
-              // s保存当前的状态号，t保存下一步的状态号
+          // s保存当前的状态号，t保存下一步的状态号
+          t = g(s, c);
+          while (t == -1) {
+              s = f(s);
               t = g(s, c);
-              while (t == -1) {
-                  s = f(s);
-                  t = g(s, c);
-              }
-  
-              if (outputs[t].size() != 0){
-                  out<<"At index: "<<char_read<<":\n\t";
-                  o(t);
-              }
-  
-              s = t;
           }
+  
+          if (outputs[t].size() != 0){
+              out<<"At index: "<<char_read<<":\n\t";
+              o(t);
+          }
+  
+          s = t;
       }
+  }
   ```
 
 ### 总体流程
