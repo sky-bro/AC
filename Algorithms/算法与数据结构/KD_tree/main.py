@@ -5,13 +5,10 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 
-old_settings = np.seterr(all='ignore')
-
 #定义节点类型
 class KD_node:
     def __init__(self, point=None, split=None, left=None, right=None):
         '''
-
         :param point: 数据点的特征向量
         :param split: 切分的维度
         :param left: 左儿子
@@ -190,7 +187,9 @@ if __name__ == "__main__":
     norm_dis_list.sort()
     plt.plot(range(len(norm_dis_list)), norm_dis_list, marker='.')
     plt.show()
-    print('get max_norm_dis:', max_dis) # get max_norm_dis: 1.2709103997891982
+    # print('get max_norm_dis:', max_dis) # get max_norm_dis: 1.2709103997891982
+    max_dis = input("input max distance between X and known closest normal points:\n\t")
+    max_dis = float(max_dis)
 
     norm_err = 0
     ddos_err = 0
