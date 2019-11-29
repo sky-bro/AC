@@ -22,7 +22,7 @@ public:
             for (; tmpi < k && front; ++tmpi) front = front->next;
             if (!front) return root.next;
             tmp = back->next;
-            while (back != front) {
+            while (back->next != front) {
                 tmp2 = back->next;
                 back->next = tmp2->next;
                 tmp2->next = front->next;
