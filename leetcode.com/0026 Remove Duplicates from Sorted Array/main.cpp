@@ -15,7 +15,8 @@ public:
             }
         }
         ++len;
-        nums.resize(len);
+        // It doesn't matter what you leave beyond the returned length.
+        // nums.resize(len);
         return len;
     }
 
