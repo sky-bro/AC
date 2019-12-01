@@ -7,7 +7,6 @@ using namespace std;
 
 class Solution {
 public:
-    public:
     int divide(int dividend, int divisor) {
         
         if(dividend == INT32_MIN && divisor == -1)
@@ -42,5 +41,8 @@ int main(int argc, char const *argv[])
 {
     Solution s;
     cout<<s.divide(1<<31, -1)<<endl;
+    cout<<s.divide(1<<31, 1)<<endl;
+    cout<<s.divide(1<<31, 2)<<endl;
+    cout<<s.divide((1<<31)-1, 2)<<endl;
     return 0;
 }
