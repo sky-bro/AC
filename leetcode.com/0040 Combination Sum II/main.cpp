@@ -32,9 +32,3 @@ public:
         return _combinationSum(candidates, target, 0);
     }
 };
-
-int main(int argc, char const *argv[])
-{
-    /* code */
-    return 0;
-}
