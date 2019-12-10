@@ -15,6 +15,12 @@
 
 * 相当于从左到右遍历，对于二叉搜索树BST，就是从小到大遍历
 
+### Hash
+
+#### 利用质数的乘积作为hash key
+
+* 相关题目：[LeetCode: 49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+
 ### [康托展开和逆康托展开](https://blog.csdn.net/wbin233/article/details/72998375)
 
 ### 线段树
