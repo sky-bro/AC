@@ -10,6 +10,7 @@ public:
         int n = intervals.size(), cur = 0, i = 0;
         while (i < n) {
             if (intervals[i][1] < newInterval[0]) {
+                // 前面和newInterval没有交叉，直接插入intervals
                 res.push_back(intervals[i]);
                 ++cur;
             } else if (intervals[i][0] > newInterval[1]) {
