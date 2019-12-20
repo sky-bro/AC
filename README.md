@@ -80,6 +80,29 @@
   }
   ```
 
+### （扩展）欧几里得算法
+
+* ```python
+  def gcd (a, b):
+      return a if b == 0 else gcd(b, a % b)
+  ```
+
+* ```python
+   def egcd ( a , b ):
+       if (b == 0):
+           return 1, 0, a
+       else:
+           x , y , q = egcd( b , a % b ) # q = GCD(a, b) = GCD(b, a%b)
+           x , y = y, ( x - (a // b) * y )
+           return x, y, q 
+  def mod_inv(a,b):
+      return egcd(a,b)[0]%b #求a模b得逆元
+  ```
+
+### split分割字符串
+
+* [C++ split分割字符串函数](https://www.cnblogs.com/dingxiaoqiang/p/8228390.html)
+
 ## 记忆
 
 * 数学函数，cmath头文件
