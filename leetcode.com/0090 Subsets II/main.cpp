@@ -8,7 +8,7 @@ class Solution {
 private:
     vector<vector<int>> result;
     size_t n;
-    void _subsetsWithDup(vector<int> &nums, int idx, vector<int> path) {
+    void _subsetsWithDup(vector<int> &nums, int idx, vector<int> &path) {
         if (idx == n) {
             result.push_back(path);
             return;
@@ -19,6 +19,9 @@ private:
         for (int i = 1; i <= m; ++i) {
             path.push_back(nums[idx]);
             _subsetsWithDup(nums, idx+m, path);
+        }
+        for (int i = 1; i <= m; ++i) {
+            path.pop_back();
         }
     }
 public:
