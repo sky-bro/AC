@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <bitset>
 
 using namespace std;
 
@@ -25,9 +26,10 @@ public:
 int main(int argc, char const *argv[])
 {
     Solution s;
-    vector<int> vi = s.grayCode(3);
+    const int n = 3;
+    vector<int> vi = s.grayCode(n);
     for (int i:vi) {
-        cout<<hex<<i<<endl;
+        cout<<bitset<n>(i)<<endl;
     }
     return 0;
 }
