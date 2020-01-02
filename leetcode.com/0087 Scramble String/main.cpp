@@ -1,29 +1,38 @@
+// https://leetcode.com/problems/scramble-string/discuss/29473/Share-my-C%2B%2B-recursive-solution
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Solution {
-private:
-    string s1, s2;
-    bool _isScramble(size_t s1_left, size_t s1_right, size_t s2_left, size_t s2_right) {
-        if (s1_left  == s1_right) {
-            return s1[s1_left] == s2[s2_left];
+public:
+    bool isScramble( string s1, string s2 )
+    {
+        if ( s1.length() != s2.length() )
+            return false;
+        int len = s1.length();
+        if ( s1 == s2 )
+            return true;
+        int table1[ 26 ] = { 0 }, table2[ 26 ] = { 0 };
+        for ( int i = 0 ; i < len ; i ++ )
+        {
+            table1[ s1[ i ] - 'a' ] ++;
+            table2[ s2[ i ] - 'a' ] ++;
         }
-
-        for (int i = 0; i < s1_right-s1_left; ++i) {
-            if (_isScramble(s1_left, s1_left+i, s2_left, s2_left+i) && _isScramble(s1_left+i+1, s1_right, s2_left+i+1, s2_right)
-                || _isScramble(s1_left, s1_left+i, s2_right-i, s2_right) && _isScramble(s1_left+i+1, s1_right, s2_left, s2_right-i-1))
+        if ( memcmp( table1, table2, 26 * sizeof( int ) ) )
+            return false;
+        if ( len <= 3 )
+            return true;
+        for ( int i = 1 ; i < len ; i ++ )
+        {
+            if ( isScramble( s1.substr( 0, i ), s2.substr( 0, i ) ) &&
+                isScramble( s1.substr( i, len - i ), s2.substr( i, len - i ) ) )
+                return true;
+            if ( isScramble( s1.substr( 0, i ), s2.substr( len - i, i ) ) &&
+                isScramble( s1.substr( i, len - i), s2.substr( 0, len - i ) ) )
                 return true;
         }
         return false;
-    }
-public:
-    bool isScramble(string s1, string s2) {
-        size_t s1_len = s1.length(), s2_len = s2.length();
-        if (s1_len != s2_len) return false;
-        if (s1_len == 0) return true;
-        this->s1 = s1; this->s2 = s2;
-        return _isScramble(0, s1_len-1, 0, s2_len-1);
     }
 };
 
