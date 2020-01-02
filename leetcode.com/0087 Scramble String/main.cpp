@@ -10,19 +10,10 @@ private:
             return s1[s1_left] == s2[s2_left];
         }
 
-        for (size_t idx = s1.find(s2[s2_left], s1_left); idx <= s1_right; ) {
-            if (idx == s1_left) {
-                if (_isScramble(s1_left+1, s1_right, s2_left+1, s2_right)) return true;
-            } else if (idx == s1_right) {
-                if (_isScramble(s1_left, s1_right-1, s2_left+1, s2_right)) return true;
-            } else {
-                size_t right_len = s1_right - idx, left_len = idx - s1_left;
-                
-                if (_isScramble(s1_left, idx-1, s2_left+1, s2_left+left_len) && _isScramble(idx+1, s1_right, s2_left+left_len+1, s2_right) // left - left
-                    || _isScramble(s1_left, idx-1, s2_left+right_len+1, s2_right) && _isScramble(idx+1, s1_right, s2_left+1, s2_left+right_len)) // left - right
-                    return true;
-            }
-            idx = s1.find(s2[s2_left], ++idx);
+        for (int i = 0; i < s1_right-s1_left; ++i) {
+            if (_isScramble(s1_left, s1_left+i, s2_left, s2_left+i) && _isScramble(s1_left+i+1, s1_right, s2_left+i+1, s2_right)
+                || _isScramble(s1_left, s1_left+i, s2_right-i, s2_right) && _isScramble(s1_left+i+1, s1_right, s2_left, s2_right-i-1))
+                return true;
         }
         return false;
     }
@@ -43,6 +34,9 @@ int main(int argc, char const *argv[])
     cout<<boolalpha<<s.isScramble(s1, s2)<<endl; // true
 
     s1 = "abcd", s2 = "bcad";
+    cout<<boolalpha<<s.isScramble(s1, s2)<<endl; // true
+
+    s1 = "abcd", s2 = "bdca";
     cout<<boolalpha<<s.isScramble(s1, s2)<<endl; // true
 
     while (cin>>s1>>s2) {
