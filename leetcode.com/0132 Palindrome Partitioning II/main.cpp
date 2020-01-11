@@ -4,35 +4,26 @@
 using namespace std;
 
 class Solution {
-private:
-    int min_cut;
-    void _minCut(int l, int r, const string &s, vector<vector<bool>> &sub_palindromes, int cur_cut) {
-        if (r < l) {
-            if (cur_cut <= min_cut) min_cut = cur_cut - 1;
-            return;
-        }
-        for (int i = 0; i <= r - l; ++i) {
-            if (!sub_palindromes[l][l+i]) continue;
-            _minCut(l+i+1, r, s, sub_palindromes, cur_cut + 1);
-        }
-    }
 public:
-    
-    int minCut(string s) {
-        int n = s.length();
-        if (n == 0) return 0;
-        min_cut = n;
-        vector<vector<bool>> sub_palindromes(n, vector<bool>(n, true));
-        for (int i = 0; i < n - 1; ++i) {
-            sub_palindromes[i][i+1] = s[i] == s[i+1];
-        }
-        for (int len = 3; len <= n; ++len) {
-            for (int i = 0; i <= n - len; ++i) {
-                sub_palindromes[i][i + len - 1] = sub_palindromes[i+1][i+len-2] && s[i] == s[i+len-1];
-            }
-        }
-        
-        _minCut(0, n-1, s, sub_palindromes, 0);
-        return min_cut;
-    }
+	int minCut(string s) {
+		int n=s.size();
+		vector<vector<int>> valid(n,vector<int>(n,1));
+		vector<int> dp(n,n);
+		for(int l=2;l<=n;l++)//bottom up,the length of the substring from 2 to n
+			for(int i=0,j=i+l-1;j<n;i++,j++){
+				valid[i][j]=s[i]==s[j] && valid[i+1][j-1];//the most left and most right are equal and its substring is also valid
+			}
+		for(int i=0;i<n;i++){//the minimum cuts from 0 to index i
+			if(valid[0][i]){//best situation
+				dp[i]=0;
+				continue;
+			}
+			for(int j=0;j<i;j++){//try every possible cut
+				if(valid[j+1][i]){
+					dp[i]=min(dp[i],dp[j]+1);
+				}
+			}
+		}
+		return dp[n-1];
+	}
 };
