@@ -16,7 +16,6 @@ private:
         if (!head2) return head1;
         ListNode head0(0);
         ListNode* tmp = &head0;
-        for (; head1 && head2; )
         while (head1 && head2) {
             if (head1->val <= head2->val) {
                 tmp->next = head1;
@@ -35,8 +34,8 @@ private:
 public:
     ListNode* sortList(ListNode* head) {
         if (!head || !head->next) return head;
-        ListNode *slow = head, *fast = head;
-        while (fast && fast->next && fast->next->next) {
+        ListNode *slow = head, *fast = head->next;
+        while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
         }
