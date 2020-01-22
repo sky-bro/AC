@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// https://leetcode.com/problems/repeated-dna-sequences/discuss/420527/Easy-Hashmap-bit-manipulation-solution-C%2B%2B
 class Solution {
 public:
     int char_to_bit(char c){
