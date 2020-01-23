@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/discuss/304001/make-it-a-story-series-and-common-method-for-buy-stock
 class Solution {
 public:
     //dp + greedy
