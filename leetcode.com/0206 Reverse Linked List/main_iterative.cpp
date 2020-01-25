@@ -13,18 +13,16 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        stack<ListNode*> stk;
-        while (head) {
-            stk.push(head);
-            head = head->next;
+        if (!head) return nullptr;
+        ListNode* next = head->next;
+        head->next = nullptr;
+        while (next) {
+            ListNode* tmp = next->next;
+            next->next = head;
+            head = next;
+            next = tmp;
+
         }
-        ListNode head0(0);
-        ListNode *tmp = &head0;
-        while (!stk.empty()) {
-            tmp->next = stk.top(); stk.pop();
-            tmp = tmp->next;
-        }
-        tmp->next = nullptr;
-        return head0.next;
+        return head;
     }
 };
