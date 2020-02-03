@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// use primes' product has a problem: https://leetcode.com/problems/group-anagrams/discuss/497843/problem-with-primes-product-solution
 class Solution {
 public:
 
