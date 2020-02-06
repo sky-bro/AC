@@ -3,26 +3,18 @@
 
 using namespace std;
 
+// ref: https://leetcode.com/problems/longest-increasing-subsequence/discuss/74924/Two-different-solutions-accepted-as-best-4ms-in-C%2B%2B-enclosed-with-a-basic-DP-solution
 class Solution {
 public:
-    int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size();
-        if (n <= 1) {
-            return n;
+    int lengthOfLIS(vector<int>& nums) 
+    {
+        vector<int> collector;
+        for(int i = 0; i < nums.size(); ++i)
+        {
+            auto iter = std::lower_bound(collector.begin(), collector.end(), nums[i]);
+            if(iter == collector.end()) collector.push_back(nums[i]);
+            else *iter = nums[i];
         }
-        vector<int> dp (n,0);
-        dp[0] = nums[0];
-        int len = 1;
-        for (int i = 1; i < n; i++) {
-            auto idx = lower_bound(dp.begin(), dp.begin()+len, nums[i]);
-            if (idx == dp.begin() + len) {
-                dp[len] = nums[i];
-                len++;
-            }
-            else {
-                *idx = nums[i];
-            }
-        }
-        return len;
+        return collector.size();
     }
 };
