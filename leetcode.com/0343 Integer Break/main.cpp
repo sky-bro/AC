@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// math behind: https://leetcode.com/problems/integer-break/discuss/80721/Why-factor-2-or-3-The-math-behind-this-problem.
 class Solution {
 public:
     int integerBreak(int n) {
