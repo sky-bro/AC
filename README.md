@@ -9,6 +9,15 @@
 
 ## 算法&数据结构
 
+### Kadane's Algorithm
+
+* ref: [Kadane's Algorithm](https://www.jianshu.com/p/89939a9dc3e1)
+
+* O(n)时间计算求最大的子数组元素和
+* [leetcode: 121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+* 拓展：同样求子数组最大元素和，但外加限制和小于k，[O(nlog(n))时间解法](https://www.quora.com/Given-an-array-of-integers-A-and-an-integer-k-find-a-subarray-that-contains-the-largest-sum-subject-to-a-constraint-that-the-sum-is-less-than-k)
+  * [leetcode: 363. Max Sum of Rectangle No Larger Than K](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/): [sol](https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/discuss/83599/Accepted-C%2B%2B-codes-with-explanation-and-references)
+
 ### Cache
 
 #### Cache替换策略
@@ -92,6 +101,10 @@
 
 #### 希尔排序 Shell's Sort
 
+#### [leetcode: Wiggle Sort 2](https://leetcode.com/problems/wiggle-sort-ii/)
+
+* virtual indexing, partition: https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)%2BO(1)-after-median-Virtual-Indexing
+
 #### 比较性质排序
 
 #### 计数性质排序
@@ -117,7 +130,11 @@
   * 快慢指针首次相遇了
   * 从相遇点再往后的第n个节点与从头往后的第n个节点，两节点相同
 
-### 二叉树遍历
+### 二叉树
+
+* 完全二叉树：若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数(即1~h-1层为一个满二叉树)，第 h 层所有的结点都连续集中在最左边
+* 满二叉树：高度为h，由2^h-1个节点构成的二叉树称为满二叉树。
+* 
 
 #### 中序遍历
 
@@ -197,6 +214,10 @@
   ```
 
 ## 数学 Maths
+
+### 牛顿法 Newton's method
+
+* 求x的平方根 `z -= (z*z - x) / (2*z)` 直到不怎么改变
 
 ### 欧拉定理
 
@@ -342,7 +363,22 @@
 
 * sort
 
+* nth_element
+
+  * 可用来寻找第k大
+
+  * 原理：[ref: 标准库 之 nth_element](https://blog.csdn.net/xuqingict/article/details/25488865)
+
+    * 如果元素个数比较多的时候，那么利用快排的partition的思想，就可以将问题的规模降低。
+
+    * 如果元素个数比较少的时候，那么直接使用插入排序，是很好的选择， 在数组元素个数比较少或者是数字基本有序的时候，插入排
+
+      序是很好的选择。
+
 * partition
+
+  * [划分(partition)算法](https://blog.csdn.net/u012604810/article/details/80838497)
+  * three-way-partition
 
 * memset
 
