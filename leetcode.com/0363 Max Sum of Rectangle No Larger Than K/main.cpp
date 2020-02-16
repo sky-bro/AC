@@ -5,9 +5,26 @@
 
 using namespace std;
 
+// ref:
+// https://leetcode.com/problems/max-sum-of-rectangle-no-larger-than-k/discuss/83599/Accepted-C%2B%2B-codes-with-explanation-and-references
 class Solution {
  private:
   int bestMaxSum(vector<int>& nums, int k) {
+    int sum = 0, maxS = INT32_MIN;
+    // Kadane's Algorithm
+    // it's a trick. Maybe O(n) to solve this problem
+    for (int i = 0; i < nums.size(); i++) {
+      sum += nums[i];
+      maxS = max(sum, maxS);
+      if (sum == k) {
+        return k;
+      }
+      if (sum < 0) sum = 0;
+    }
+    if (maxS <= k) {
+      return maxS;
+    }
+
     set<int> sums;
     int n = nums.size(), pre_sum = 0, res = INT32_MIN;
     sums.insert(0);
