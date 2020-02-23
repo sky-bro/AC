@@ -15,7 +15,7 @@
     )
     ```
 
-* **Exported Names**: a name is exported if it begins with a capital letter
+* **Exported Names**: a name is exported if it begins with a **capital** letter
 
 * **Functions**
 
@@ -46,6 +46,53 @@
       	return
       }
       ```
+    
+  * **Function values**
+
+    * ```go
+      func compute(fn func(float64, float64) float64) float64 {
+      	return fn(3, 4)
+      }
+      
+      func main() {
+      	hypot := func(x, y float64) float64 {
+      		return math.Sqrt(x*x + y*y)
+      	}
+      	fmt.Println(hypot(5, 12))
+      
+      	fmt.Println(compute(hypot))
+      	fmt.Println(compute(math.Pow))
+      }
+      ```
+
+  * **Function closures**
+
+    * ```go
+      func adder() func(int) int {
+      	sum := 0
+      	return func(x int) int {
+      		sum += x
+      		return sum
+      	}
+      }
+      ```
+
+    * ```go
+      func fibonacci() func() int {
+      	a, b := 1, 0
+      	return func() int {
+      		a, b = b, a+b
+      		return a
+      	}
+      }
+      
+      func main() {
+      	f := fibonacci()
+      	for i := 0; i < 10; i++ {
+      		fmt.Println(f())
+      	}
+      }
+      ```
 
 * **`var` statement**:
 
@@ -65,26 +112,160 @@
 
 * **short variable declaration**: `:=`, only inside function
 
-* **Basic Types**
+* **Types**
 
-  * ```go
-    bool
-    
-    string
-    
-    int  int8  int16  int32  int64
-    uint uint8 uint16 uint32 uint64 uintptr
-    
-    byte // alias for uint8
-    
-    rune // alias for int32
-         // represents a Unicode code point
-    
-    float32 float64
-    
-    // import "math/cmplx"
-    complex64 complex128
-    ```
+  * **Basic Types**
+
+      * ```go
+        bool
+
+        string
+
+        int  int8  int16  int32  int64
+        uint uint8 uint16 uint32 uint64 uintptr
+
+        byte // alias for uint8
+
+        rune // alias for int32
+             // represents a Unicode code point
+
+        float32 float64
+
+        // import "math/cmplx"
+        complex64 complex128
+        ```
+      
+  * `type` keyword: `type myint int`
+
+  * **Structs**
+
+      * ```go
+          type Vertex struct {
+          	X int
+          	Y int
+          }
+          
+          // struct literals
+          var (
+          	v1 = Vertex{1, 2}  // has type Vertex
+              v2 = Vertex{X: 1}  // Y:0 is implicit (subset of fields, order not relavant)
+          	v3 = Vertex{}      // X:0 and Y:0
+          	p  = &Vertex{1, 2} // has type *Vertex
+  )
+          
+          func main() {
+              v := Vertex{1, 2}
+              v.X = 4
+          	fmt.Println(v.X, v.Y)
+          }
+          ```
+          
+      
+  * **Arrays** and **Slices**
+
+      * **zero value of  a slice** is `nil`, `nil` slice has `0 len` and `0 cap`, but doesn't mean a `0 len` and `0 cap` slice is `nil`
+
+          * ```go
+          var a []int
+              a == nil // true
+          
+              []int{} == nil // false
+          
+              // both have 0 len and 0 cap
+              ```
+      
+      * An array has a **fixed size**. A slice, on the other hand, is a **dynamically-sized**
+
+      * An array's **length** is part of its type: `var a [10]int`
+      
+      * The type `[]T` is a **slice** with elements of type `T`.
+      
+      * **Slices are like references to arrays**: A slice does not store any data, it just describes a section of an underlying array.
+      
+      * ```go
+          primes := [6]int{2, 3, 5, 7, 11, 13} // array literal
+          []int{1, 2, 3} // slice literal (without length)
+          []bool{true, true, false} // slice literal
+      var s []int = primes[1:4] // slice an array {3, 5, 7}
+          primes[0:]
+          primes[:3]
+          primes[0:6]
+          primes[:]
+          ```
+          
+      * slice **length** and **capacity**: `len(s), cap(s)`, can **extend a slice's length** by re-slicing it, provided it has sufficient capacity
+      
+      * create slice with **make**
+      
+          * ```go
+              a := make([]int, 5) // 5 len, 5 cap, [0, 0, 0, 0, 0]
+              b := make([]int, 0, 5) // 0 len, 5 cap, []
+              ```
+      
+      * **slices of slices/arrays**
+      
+      * **appending to a slice**
+      
+          * ```go
+              // func append(s []T, vs ...T) []T, return a new slice, original slice not touched
+              // this may change the underlying array
+              	//if cap is big enough to hold new elements)
+              // if not, original array not touched, move elements to a new array (extend the cap)
+              
+              var s []int
+              
+              // append works on nil slices.
+              s = append(s, 0)
+              
+              // The slice grows as needed.
+              s = append(s, 1)
+              
+              // We can add more than one element at a time.
+              s = append(s, 2, 3, 4)
+              ```
+      
+  * **Maps**
+
+      * **zero value** of map is `nil`, has no keys, nor can keys be added
+
+      * **map literals** are like struct literals, but **keys are required**
+
+      * **delete element**: `delete(m, key)`
+
+      * ```go
+          // make
+          var m map[string]Vertex // a map from string to Vertex, nil
+          m = make(map[string]Vertex) // initialized and ready for use
+          // m := make(map[string]Vertex)
+          m["Bell Labs"] = Vertex{ // insert or update
+              40.68433, -74.39967,
+          }
+          fmt.Println(m["Bell Labs"])
+          
+          // map literals
+          var m = map[string]Vertex{
+          	"Bell Labs": Vertex{
+          		40.68433, -74.39967,
+          	},
+          	"Google": Vertex{
+          		37.42202, -122.08408,
+          	},
+          }
+          
+          // literals continued: omit type name
+          var m = map[string]struct {
+          	x int
+          	y int
+          }{
+          	"Bell Labs": {1, 2},
+          	"Google":    {3, 4},
+          }
+          
+          // two value assignment
+          elem, ok := m[key] // if key is in m, ok = true, if not, ok = false
+          ```
+
+      * 
 
 * **Zero Values**: Variables declared without an explicit initial value are given their *zero value*.
 
@@ -128,6 +309,25 @@
         // forever
     }
     ```
+    
+  * The **range** form of the `for` loop iterates over a slice or map.
+
+    * ```go
+      var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+      
+      func main() {
+          for i, v := range pow { // returns index, value (copy)
+      		fmt.Printf("2**%d = %d\n", i, v)
+      	}
+      }
+      
+      // skip index or value
+      for i, _ := range pow
+      for i := range pow // only index, omit second variable
+      for _, value := range pow
+      ```
+
+    * 
 
 * **If**
 
@@ -154,7 +354,7 @@
 
 * **Switch**
 
-  * no `break`，have `fallthrough`
+  * no `break`，has `fallthrough`
 
   * cases need not be constants
 
@@ -202,5 +402,26 @@
         defer fmt.Println(i)
     }
     ```
+    
+  * stacking defers: **LIFO** manner
 
-* 
+* **Pointers**
+
+  * `var p *int` has **zero** value `nil`
+
+  * ```go
+    i := 42
+    j := &i // j is of type *int
+    ```
+
+  * go has no pointer arithmetic
+
+  * pointer to structs
+
+    * ```go
+      v := Vertex{1, 2}
+      p := &v
+      p.X = 1e9 // no need to use (*p).X
+      ```
+
+  * 
