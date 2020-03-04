@@ -14,8 +14,7 @@ class Solution {
     }
     vector<int> res;
     for (int i = 0; i < n; ++i) {
-      auto it =
-          lower_bound(start2index.begin(), start2index.end(), intervals[i][1]);
+      auto it = start2index.lower_bound(intervals[i][1]);
       if (it == start2index.end())
         res.push_back(-1);
       else
