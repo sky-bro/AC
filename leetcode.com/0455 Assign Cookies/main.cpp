@@ -10,9 +10,8 @@ class Solution {
     sort(g.begin(), g.end());
     sort(s.begin(), s.end());
     int res = 0, gn = g.size(), sn = s.size();
-    for (int i = 0, j = 0; i < gn && j < sn; ++i) {
-      while (j < sn && s[j] < g[i]) ++j;
-      if (j++ < sn) ++res;
+    for (int j = 0; res < gn && j < sn; ++j) {
+      if (g[res] <= s[j]) ++res;
     }
     return res;
   }
