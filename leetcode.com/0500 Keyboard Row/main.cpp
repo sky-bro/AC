@@ -12,12 +12,11 @@ class Solution {
     for (char c : "ASDFGHJKL") rows[c] = rows[c + 32] = 2;
     for (char c : "ZXCVBNM") rows[c] = rows[c + 32] = 3;
     vector<string> res;
-    for (string& word : words) {
+    copy_if(words.begin(), words.end(), back_inserter(res), [&](string& word) {
       uint8_t row = rows[word[0]];
-      if (all_of(word.begin(), word.end(),
-                 [&rows, row](char c) { return rows[c] == row; }))
-        res.push_back(word);
-    }
+      return all_of(word.begin(), word.end(),
+                    [&](char c) { return rows[c] == row; });
+    });
     return res;
   }
 };
