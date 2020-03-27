@@ -9,6 +9,57 @@
 
 ## 算法&数据结构
 
+### 排列
+
+#### next_permutation
+
+* ```c++
+  bool nextPermutation(string& nums) {
+    if (nums.empty()) return false;
+    int i = nums.size() - 1;
+    while (i >= 1 && nums[i] <= nums[i - 1]) i--;
+    if (i == 0) return false;  // no next permutation, i.e. already largest
+  
+    int j = nums.size() - 1;
+    while (nums[j] <= nums[i - 1]) j--;
+    swap(nums[i - 1], nums[j]);
+  
+    reverse(nums.begin() + i, nums.end());
+    return true;
+  }
+  ```
+
+* related question:
+
+  * [leetcode: 31. Next Permutation](https://leetcode.com/problems/next-permutation/)
+  * [leetcode: 556. Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/)
+
+#### prev_permutation
+
+### 组合
+
+#### 快速求组合数
+
+* [ref: 如何快速求解组合数 C(n,m) 取模 【最简单的方法】](https://blog.csdn.net/qq_41357771/article/details/79896213)
+
+### Random / Sampling
+
+* Reservoir sampling
+
+### Stack-sortable permutation
+
+* [wiki](https://en.wikipedia.org/wiki/Stack-sortable_permutation)
+* 
+
+### SkipLists 跳跃表
+
+* [跳表（skiplist）的理解](https://blog.csdn.net/weixin_41462047/article/details/81253106)
+
+### Union Find
+
+* [有一种算法叫做“Union-Find”？](https://www.cnblogs.com/SeaSky0606/p/4752941.html) (原文有错--博主知道了，但好像还没改。。。见第一条评论`id[q]=pID;//这里应该改为id[qID]=pID;`)
+* leetcode 399: [[Java] Union find and DFS](https://leetcode.com/problems/evaluate-division/discuss/278276/Java-Union-find-and-DFS)
+
 ### Kadane's Algorithm
 
 * ref: [Kadane's Algorithm](https://www.jianshu.com/p/89939a9dc3e1)
@@ -148,6 +199,8 @@
 
 ### Hash
 
+#### Rolling hash
+
 #### 利用质数的乘积作为hash key
 
 * 相关题目：[LeetCode: 49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
@@ -267,9 +320,6 @@
 
 ### 杨辉三角/Pascal Triangle
 
-### 快速求组合数
-
-* [ref: 如何快速求解组合数 C(n,m) 取模 【最简单的方法】](https://blog.csdn.net/qq_41357771/article/details/79896213)
 * 
 
 ### RSA
@@ -282,6 +332,29 @@
 * [C++ split分割字符串函数](https://www.cnblogs.com/dingxiaoqiang/p/8228390.html)
 
 ## 记忆
+
+* next_permutation
+
+* complex
+
+* regex
+
+  * 
+  
+* cin
+
+  * cin.ignore
+  * [cin.ignore()的用法](https://blog.csdn.net/wxbmelisky/article/details/48596881)
+
+* using
+
+  * [C++关键字之using的的用法总结](https://www.cnblogs.com/wangkeqin/p/9339862.html)
+
+* random
+
+  * [C++标准库——random](https://blog.csdn.net/u010487568/article/details/51526337?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task)
+
+* decltype
 
 * [函数对象（函数符）](https://blog.csdn.net/u014709760/article/details/89323988)
 
@@ -339,7 +412,7 @@
 
 * multiset 
   * lower_bound 大于等于最小
-  * upper_bound 小于等于最大
+  * upper_bound 小于等于最大f
   * find
   * erase
     * erase接收value或者iterator，接收value会删除所有等于value的值，接收iterator只会删除iterator指向的值
@@ -350,6 +423,8 @@
   * 不能有重复元素
   
 * multimap
+
+  * equal_range
 
 * map
   * 关键字不相等
@@ -385,6 +460,21 @@
 * cctype
 
 * bitset
+
+  * [leetcode 416: Partition Equal Subset Sum](https://leetcode.com/problems/partition-equal-subset-sum/discuss/90590/Simple-C%2B%2B-4-line-solution-using-a-bitset)
+
+  * [leetcode 461: Hamming Distance](https://leetcode.com/problems/hamming-distance)
+
+    * ```c++
+      // ref: https://leetcode.com/problems/hamming-distance/discuss/94832/C%2B%2B-one-liner
+      class Solution {
+      public:
+          int hammingDistance(int x, int y) {
+              // return __builtin_popcount(x^y);
+              return bitset<32>(x^y).count();
+          }
+      };
+      ```
 
 * 圆周率PI怎么得
 
