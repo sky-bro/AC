@@ -15,7 +15,7 @@ bool compare_position(const vector<int>& a, const vector<int>& b) {
   return (a[0] < b[0]) || (a[0] == b[0] && a[1] < b[1]);
 }
 
-// Convex hull，返回线上所有点，所有点在一条线上
+// Convex hull，返回hull上所有点，可以应对所有点在一条线上/单一点的情况
 class Solution {
  public:
   vector<vector<int>> outerTrees(vector<vector<int>>& points) {
@@ -23,7 +23,7 @@ class Solution {
     // 对于单一点的情况
     // if (n <= 1) return points;
     // 只有两个点实际上也可以直接返回
-    if (n <= 2) return points;
+    // if (n <= 2) return points;
     vector<vector<int>> res(2 * n);
     sort(points.begin(), points.end(), compare_position);
     int m = 0;
@@ -36,6 +36,7 @@ class Solution {
       res[m++] = points[i];
     }
 
+    // 处理所有点在一条线上/只有一个点的情况，
     if (m == n) {
       res.resize(m);
       return res;
