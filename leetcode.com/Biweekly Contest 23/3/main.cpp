@@ -4,28 +4,29 @@
 
 using namespace std;
 
+// check four corners and four sides
+
 class Solution {
  private:
   bool check_corner(int x, int y, int radius, int x_center, int y_center) {
-    double x_d = x - x_center, y_d = y - y_center;
+    int x_d = x - x_center, y_d = y - y_center;
     return x_d * x_d + y_d * y_d <= radius * radius;
   }
 
  public:
   bool checkOverlap(int radius, int x_center, int y_center, int x1, int y1,
                     int x2, int y2) {
-    double x_center1 = (x1 + x2) / 2.0, y_center1 = (y1 + y2) / 2.0;
-    double x_d = abs(x_center - x_center1);
-    double y_d = abs(y_center - y_center1);
-    double center_dis = sqrt(x_d * x_d + y_d * y_d);
-    if (center_dis <= radius + min(abs(x_center1 - x1), abs(y_center1 - y1)))
-      return true;
+    // center inside rect
+    if (x_center <= x2 && x_center >= x1 && y_center <= y2 && y_center >= y1) return true;
+
+    // check rect corner
     if (check_corner(x1, y1, radius, x_center, y_center) ||
         check_corner(x1, y2, radius, x_center, y_center) ||
         check_corner(x2, y2, radius, x_center, y_center) ||
         check_corner(x2, y1, radius, x_center, y_center))
       return true;
     
+    // check rect sides
     int lb = x_center - radius;
     int rb = x_center + radius;
     int tb = y_center + radius;

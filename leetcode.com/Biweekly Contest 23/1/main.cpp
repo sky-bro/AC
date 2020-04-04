@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// map and count
+
 class Solution {
 public:
     int countLargestGroup(int n) {
