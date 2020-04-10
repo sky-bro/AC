@@ -11,10 +11,11 @@ public:
         int l = 1, r = m *n;
         while (l < r) {
           int mid = (l + r) / 2;
-          int j = n, cnt = 0;
+          int /*j = n,*/ cnt = 0;
           for (int i = 1; i <= m; ++i) {
-            while (i*j > mid) --j;
-            cnt += j;
+            // while (i*j > mid) --j;
+            // cnt += j;
+            cnt += (mid / i < n) ? mid / i : n;
           }
           if (cnt < k) l = mid + 1;
           else r = mid;
