@@ -9,9 +9,9 @@ using namespace std;
 // need to analyse/simplify different cases
 class Solution {
  private:
-  // lights are numbered from right to left: 6..1
+  // lights are numbered from right to left: 3..1
   // 1 means the swither can flip that light
-  vector<int> switchers = {0b111111, 0b101010, 0b010101, 0b001001};
+  vector<int> switchers = {0b111, 0b010, 0b101, 0b001};
   int cnt_bits(int x) {
     int res = 0;
     while (x) {
@@ -28,13 +28,10 @@ class Solution {
     // allocate m to four switchers/plates (only need to know the number is even
     // or odd) [0, 2**4) 0 0 0 0 ~ 1 1 1 1 printArr(switchers);
 
-    // for n, only need to consider n <= 6 (T = 6) ?
-    // maybe less, but use swither1, lights pattern repeats after 1 lights, for swither2 & swither3
-    // , repeat after 2lights, switcher4 - repeat after 3 lights, so I think
-    // together they must repeat after 6 lights
-    int lights = 0b111111;
-    // if n less than 6, just consider n lights
-    if (n < 6) lights = (1 << n) - 1;
+    // for n, only need to consider n <= 3 
+    int lights = 0b111;
+    // if n less than 3, just consider n lights
+    if (n < 3) lights = (1 << n) - 1;
     // if can reach status i (lights = i), statuses[i] = true
     vector<bool> statuses(lights + 1);
     for (int i = 0; i < 16; ++i) {
