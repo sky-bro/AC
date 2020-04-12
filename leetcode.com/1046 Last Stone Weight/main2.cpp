@@ -12,7 +12,7 @@ class Solution {
   int lastStoneWeight(vector<int>& stones) {
     int m = *max_element(stones.begin(), stones.end());
     vector<int> bucket(m + 1);
-    for (int stone : stones) ++bucket[m];
+    for (int stone : stones) ++bucket[stone];
     int i = m, lastJ = m;
     while (i) {
       if (bucket[i] == 0) {
@@ -20,15 +20,15 @@ class Solution {
         continue;
       }
 
-      if (bucket[i] & 1 == 0) {  // smash with myself
+      if ((bucket[i] & 1) == 0) {  // smash with myself
         --i;
         continue;
       }
 
       // smash myself, then one stone of weight i left
-      int j = min(lastJ, i - 1); // very clever to use lastJ
+      int j = min(lastJ, i - 1);  // very clever to use lastJ
       while (j && bucket[j] == 0) --j;
-      if (j == 0) return i; // this is the last stone, return
+      if (j == 0) return i;  // this is the last stone, return
 
       lastJ = j;
       --bucket[j];
@@ -42,3 +42,10 @@ class Solution {
     return 0;
   }
 };
+
+int main(int argc, char const* argv[]) {
+  Solution s;
+  vector<int> stones = {2, 7, 4, 1, 8, 1};
+  cout << s.lastStoneWeight(stones) << endl;
+  return 0;
+}
