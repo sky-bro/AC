@@ -1,5 +1,7 @@
 ## 内容目录
-* [牛顿迭代法](./newton-method/README.md)
+* TODO...
+
+* [牛顿迭代法](#)
   * [如何通俗易懂地讲解牛顿迭代法？](<https://blog.csdn.net/ccnt_2012/article/details/81837154>)
 * 求不大于n的全部质数
 * [计算星期几](#)
@@ -8,6 +10,84 @@
 ## 其他工具
 
 ## 算法&数据结构
+
+### A*
+
+* 
+
+### Maze router
+
+* [wiki: routing](https://en.wikipedia.org/wiki/Routing_(electronic_design_automation))
+
+* [Maze routing & channel routing](http://users.eecs.northwestern.edu/~haizhou/357/lec6.pdf)
+
+#### Lee Algorithm
+
+#### Hadlock (实际上是A*算法的一个实例)
+
+* used in computing shortest distance/path in a grid from S to T
+* faster than bfs, use dequeue (double ended queue), each node stores an extra `detour_count` value (while bfs just needs node's row and column value)
+* the wanted shortest distance (if found: cur_node == T) is `hamming distance + 2*detour_count`, when we move closer to T, detour_count remain as last node, push this next_node to deque from one side (we get cur_node also from this side); when we move further from T, detour_count increase 1, push this next_node to dequeue from other side of dequeue. (basically same as bfs, just uses a dequeue)
+* related problems: [leetcode 0675: Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/), code on github
+
+### Find Prime Numbers
+
+#### Sieve of Eratosthenes
+
+* [wiki](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+
+  * ```pseudocode
+    algorithm Sieve of Eratosthenes is
+        input: an integer n > 1.
+        output: all prime numbers from 2 through n.
+    
+        let A be an array of Boolean values, indexed by integers 2 to n,
+        initially all set to true.
+        
+        for i = 2, 3, 4, ..., not exceeding √n do
+            if A[i] is true
+                for j = i2, i2+i, i2+2i, i2+3i, ..., not exceeding n do
+                    A[j] := false
+    
+        return all i such that A[i] is true.
+    ```
+
+#### Segmented Sieve
+
+### Ring Buffer
+
+* 
+
+### 正则Regex
+
+* [正则表达式30分钟入门教程](https://deerchao.cn/tutorials/regex/regex.htm)
+
+* related problems
+  * [leetcode: 591. Tag Validator](https://leetcode.com/problems/tag-validator/)
+
+### Convex hull
+
+* [Convex hull & different algorithms](http://www.csie.ntnu.edu.tw/~u91029/ConvexHull.html)
+  * Graham's Scan
+  * Andrew's Monotone Chain (better I think)
+* [wiki](https://en.wikipedia.org/wiki/Convex_hull_algorithms)
+* related problems:
+  * [leetcode: 587. Erect the Fence](https://leetcode.com/problems/erect-the-fence/)
+
+### Merkle Tree
+
+* [Merkle Hashing Tree](https://www.jianshu.com/p/819e8fd10938)
+
+### 2-SAT
+
+* TODO
+* [2-sat算法]([http://laughingtree.cn/2019/11/09/2-sat%E7%AE%97%E6%B3%95/](http://laughingtree.cn/2019/11/09/2-sat算法/))
+
+### 背包
+
+* TODO
+* [经典背包问题 01背包+完全背包+多重背包](https://blog.csdn.net/byn12345/article/details/81367392)
+  * 二进制分解（多重背包）
 
 ### 排列
 
@@ -29,7 +109,7 @@
   }
   ```
 
-* related question:
+* related problems:
 
   * [leetcode: 31. Next Permutation](https://leetcode.com/problems/next-permutation/)
   * [leetcode: 556. Next Greater Element III](https://leetcode.com/problems/next-greater-element-iii/)
@@ -49,7 +129,6 @@
 ### Stack-sortable permutation
 
 * [wiki](https://en.wikipedia.org/wiki/Stack-sortable_permutation)
-* 
 
 ### SkipLists 跳跃表
 
@@ -84,6 +163,12 @@
 ##### LFU:
 
 ### 字符串匹配
+
+#### AC
+
+#### KMP
+
+* TODO..
 
 #### Trie (Prefix Tree) 前缀树，字典树
 
@@ -180,12 +265,14 @@
 * 判断开始进入环的节点
   * 快慢指针首次相遇了
   * 从相遇点再往后的第n个节点与从头往后的第n个节点，两节点相同
+* related problems:
+  * [leetcode: 565. Array Nesting](https://leetcode.com/problems/array-nesting/)
 
 ### 二叉树
 
 * 完全二叉树：若设二叉树的深度为h，除第 h 层外，其它各层 (1～h-1) 的结点数都达到最大个数(即1~h-1层为一个满二叉树)，第 h 层所有的结点都连续集中在最左边
 * 满二叉树：高度为h，由2^h-1个节点构成的二叉树称为满二叉树。
-* 
+* [Preorder, Inorder, and Postorder Iteratively Summarization](https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45551/Preorder-Inorder-and-Postorder-Iteratively-Summarization)
 
 #### 中序遍历
 
@@ -268,6 +355,16 @@
 
 ## 数学 Maths
 
+### Prime Factorization 质因数分解
+
+* 
+
+### Fermat's Theorem
+
+* [wiki: Fermat's Last Theorem](https://en.wikipedia.org/wiki/Fermat's_Last_Theorem)
+
+* [wiki: Fermat's theorem on sums of two squares](https://en.wikipedia.org/wiki/Fermat's_theorem_on_sums_of_two_squares)
+
 ### 牛顿法 Newton's method
 
 * 求x的平方根 `z -= (z*z - x) / (2*z)` 直到不怎么改变
@@ -284,7 +381,9 @@
 
 ### （扩展）欧几里得
 
-* 又称**辗转相除法**，是指用于计算两个正整数a，b的最大公约数（Greatest Common Divisor），**扩展欧几里得**除了求出最大公约数，还找出相应的x，y（其中一个很可能是负数）
+* 又称**辗转相除法**，是指用于计算两个正整数a，b的最大公约数 (GCD, Greatest Common Divisor)，**扩展欧几里得**除了求出最大公约数，还找出相应的x，y（其中一个很可能是负数）
+  
+  * 有了最大公约数，求最小共倍数 (LCM, Least Common Multiple)就是: `a * b / gcd(a, b)`
   
 * **贝祖等式**（贝祖定理）：是一个关于最大公约数的定理，对任何整数a，b和它们的最大公约数d，方程$ax+by=m$有整数解当且仅当m是d的倍数
   
@@ -333,13 +432,47 @@
 
 ## 记忆
 
+* namespace
+
+  * unnamed/anonymous namespace
+  
+* tuple
+
+  * how to hash a tuple in c++ ?
+  
+  * [Generic hash for tuples in unordered_map / unordered_set](https://stackoverflow.com/questions/7110301/generic-hash-for-tuples-in-unordered-map-unordered-set)
+
+* scanf
+
+  * ```c
+  std::sscanf(str.c_str(), "%d:%[^:]:%d", &id, strbuf, &tstamp);
+    ```
+
+* array
+
+  * 数组类是**固定大小**的序列容器
+
+* sstream
+
+  * 
+
+* numeric
+
+  * gcd, lcm (C++17)
+  * accumulate
+
 * next_permutation
 
 * complex
 
-* regex
+* 正则 regex
 
-  * 
+  * [正则表达式30分钟入门教程](https://deerchao.cn/tutorials/regex/regex.htm)
+    * 贪婪模式
+    * 后向引用
+      * 匹配重复单词：`\b(\w+)\b\s+\1\b` 或 `\b(?<Word>\w+)\b\s+\k<Word>\b`
+    * 捕获
+    * 零宽断言
   
 * cin
 
@@ -377,6 +510,7 @@
 * 数学函数，cmath头文件
 
   * [cmath(常用函数)](https://blog.csdn.net/weixin_41183791/article/details/89603259)
+  * atan, atan2
 
 * strupr(char []) not in standard c library
 
@@ -500,3 +634,4 @@
 - [ ] 9.1.1 took 500ms, To Be Optimized
 - [ ] 字符串匹配算法（判断是否为子串）[NOI/1.7编程基础之字符串/18:验证子串](http://noi.openjudge.cn/ch0107/18)
 - [ ] setprecision为何能表示很大的pow(2, n)
+- [ ] 
