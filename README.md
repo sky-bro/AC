@@ -11,6 +11,8 @@
 
 ## 算法&数据结构
 
+### 割点，桥？
+
 ### A*
 
 * 
@@ -27,7 +29,7 @@
 
 * used in computing shortest distance/path in a grid from S to T
 * faster than bfs, use dequeue (double ended queue), each node stores an extra `detour_count` value (while bfs just needs node's row and column value)
-* the wanted shortest distance (if found: cur_node == T) is `hamming distance + 2*detour_count`, when we move closer to T, detour_count remain as last node, push this next_node to deque from one side (we get cur_node also from this side); when we move further from T, detour_count increase 1, push this next_node to dequeue from other side of dequeue. (basically same as bfs, just uses a dequeue)
+* the wanted shortest distance (if found: cur_node == T) is `hamming distance + 2*detour_count`, when we move closer to T, `detour_count` remains same as last node, push this `next_node` to dequeue from one side (we get `cur_node` also from this side); when we move further from T, `detour_count` increases by 1, and we push this `next_node` to dequeue from the other side of dequeue. (basically same as bfs, just uses a dequeue)
 * related problems: [leetcode 0675: Cut Off Trees for Golf Event](https://leetcode.com/problems/cut-off-trees-for-golf-event/), code on github
 
 ### Find Prime Numbers
@@ -137,7 +139,10 @@
 ### Union Find
 
 * [有一种算法叫做“Union-Find”？](https://www.cnblogs.com/SeaSky0606/p/4752941.html) (原文有错--博主知道了，但好像还没改。。。见第一条评论`id[q]=pID;//这里应该改为id[qID]=pID;`)
-* leetcode 399: [[Java] Union find and DFS](https://leetcode.com/problems/evaluate-division/discuss/278276/Java-Union-find-and-DFS)
+* related problems
+  * leetcode 399: [[Java] Union find and DFS](https://leetcode.com/problems/evaluate-division/discuss/278276/Java-Union-find-and-DFS)
+  * [leetcode 684: Redundant Connection](https://leetcode.com/problems/redundant-connection/)
+  * [leetcode 685: Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/)
 
 ### Kadane's Algorithm
 
@@ -168,7 +173,67 @@
 
 #### KMP
 
-* TODO..
+* 最大前缀后缀公共元素长度（实际上是dp问题）
+
+  * ```c++
+    // D A B C D A B D E
+    // 0 0 0 0 1 2 3 1 0 
+    int main() {
+        string s = "DABCDABDE";
+        int n = s.length();
+        // int len = 0;
+        // int i = 1; // 从第二个字符开始
+        vector<int> tr(n);
+        for (int len = 0, i = 1; i < n;) {
+            if (s[i] == s[len]) tr[i++] = ++len;
+            else if (len == 0) tr[i++] = 0;
+            else len = tr[len-1];
+        }
+    }
+    ```
+
+* 匹配过程
+
+  * ```c++
+    int main() {
+        string s1 = "ABAABABAC"
+        string s2 = "BABAC"; // ABAA(BABAC)
+        int n1 = s1.length(), n2 = s2.length();
+        vector<int> tr(n2);
+        for (int len = 0, i = 1; i < n2;) {
+            if (s2[i] == s2[len]) tr[i++] = ++len;
+            else if (len == 0) tr[i++] = 0;
+            else len = tr[len-1];
+        }
+        // B A B A C
+        // 0 0 1 2 0
+        for (int i = 0, j = 0; i < n1; ) { // i never decreases
+            while (j < n2 && s1[i] == s2[j]) {
+                ++i;
+                ++j;
+            }
+            if (j == n2) {
+                // found a match
+                
+                // match start at
+                // cout << i - j << endl;
+                // return 0;
+                
+                // or continue matching more
+                // TODO ...
+                // i may decrease ? change tr ?
+                // ...
+            }
+            
+            // not found
+            if (j == 0) ++i;
+            else j = tr[j-1];
+        }
+        
+    }
+    ```
+
+  * 
 
 #### Trie (Prefix Tree) 前缀树，字典树
 
