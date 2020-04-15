@@ -15,6 +15,7 @@ class Solution {
       sums[j] += nums[i];
       if (dfs(nums, i + 1, sums, k)) return true;
       sums[j] -= nums[i];
+      if (sums[j] == 0) return false; // wtf! no need to try other empty buckets (sums is the buckets)
     }
     return false;
   }
