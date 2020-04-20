@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// space limited, to save space, we could use a map
+// space limited, to save space, we could use a set (ordered for binary search)
 
 class MyHashSet {
  public:
@@ -14,7 +14,7 @@ class MyHashSet {
   MyHashSet() { v.resize(1024); }
 
   void add(int key) {
-    while (key > v.size()) v.resize(v.size() * 2);
+    while (key >= v.size()) v.resize(max(int(v.size() * 2), key+1));
     v[key] = true;
   }
 
