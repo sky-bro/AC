@@ -1,26 +1,37 @@
-## 内容目录
-* TODO...
+# My Coding Practice
 
-* [牛顿迭代法](#)
-  * [如何通俗易懂地讲解牛顿迭代法？](<https://blog.csdn.net/ccnt_2012/article/details/81837154>)
-* 求不大于n的全部质数
-* [计算星期几](#)
-* strtok实现
-* 排序
-## 其他工具
+## The Plan
 
-## 算法&数据结构
+* [ ] I'm trying to finish all [leetcode](https://leetcode.com/sky_io/) (algorithm) problems the first time. (do it in the order of problem ID)
+* [ ] After that I'll review my code again by category, write/organize my documents.
 
-### 割点，桥？
+## 算法&数据结构 Algorithms & Data Structures
+
+### Coordinate Compression 坐标压缩
+
+* ref: [leetcode solution: 699 Falling Squares](https://leetcode.com/articles/falling-squares/)
+
+* ```python
+  coords = set()
+  for left, size in positions:
+      coords.add(left)
+      coords.add(left + size - 1)
+  index = {x: i for i, x in enumerate(sorted(coords))}
+  # position: [(100,100), (200,100)]
+  # index = {100: 0, 199: 1, 200: 2, 299: 3}
+  ```
+
+### 割点，桥
+
+* TODO
 
 ### A*
 
-* 
+* TODO
 
 ### Maze router
 
 * [wiki: routing](https://en.wikipedia.org/wiki/Routing_(electronic_design_automation))
-
 * [Maze routing & channel routing](http://users.eecs.northwestern.edu/~haizhou/357/lec6.pdf)
 
 #### Lee Algorithm
@@ -42,15 +53,15 @@
     algorithm Sieve of Eratosthenes is
         input: an integer n > 1.
         output: all prime numbers from 2 through n.
-    
+
         let A be an array of Boolean values, indexed by integers 2 to n,
         initially all set to true.
-        
+
         for i = 2, 3, 4, ..., not exceeding √n do
             if A[i] is true
                 for j = i2, i2+i, i2+2i, i2+3i, ..., not exceeding n do
                     A[j] := false
-    
+
         return all i such that A[i] is true.
     ```
 
@@ -58,7 +69,7 @@
 
 ### Ring Buffer
 
-* 
+* TODO
 
 ### 正则Regex
 
@@ -140,9 +151,10 @@
 
 * [有一种算法叫做“Union-Find”？](https://www.cnblogs.com/SeaSky0606/p/4752941.html) (原文有错--博主知道了，但好像还没改。。。见第一条评论`id[q]=pID;//这里应该改为id[qID]=pID;`)
 * related problems
-  * leetcode 399: [[Java] Union find and DFS](https://leetcode.com/problems/evaluate-division/discuss/278276/Java-Union-find-and-DFS)
+  * [leetcode 399: [Java] Union find and DFS](https://leetcode.com/problems/evaluate-division/discuss/278276/Java-Union-find-and-DFS)
   * [leetcode 684: Redundant Connection](https://leetcode.com/problems/redundant-connection/)
   * [leetcode 685: Redundant Connection II](https://leetcode.com/problems/redundant-connection-ii/)
+  * [leetcode 721: Accounts Merge](https://leetcode.com/problems/accounts-merge/)
 
 ### Kadane's Algorithm
 
@@ -165,7 +177,7 @@
 
 * 最近用到的数据被重用的`概率`比最早用到的数据大的多
 
-##### LFU:
+##### LFU
 
 ### 字符串匹配
 
@@ -177,7 +189,7 @@
 
   * ```c++
     // D A B C D A B D E
-    // 0 0 0 0 1 2 3 1 0 
+    // 0 0 0 0 1 2 3 1 0
     int main() {
         string s = "DABCDABDE";
         int n = s.length();
@@ -214,26 +226,24 @@
             }
             if (j == n2) {
                 // found a match
-                
+
                 // match start at
                 // cout << i - j << endl;
                 // return 0;
-                
+
                 // or continue matching more
                 // TODO ...
                 // i may decrease ? change tr ?
                 // ...
             }
-            
+
             // not found
             if (j == 0) ++i;
             else j = tr[j-1];
         }
-        
+
     }
     ```
-
-  * 
 
 #### Trie (Prefix Tree) 前缀树，字典树
 
@@ -304,7 +314,7 @@
 
 #### [leetcode: Wiggle Sort 2](https://leetcode.com/problems/wiggle-sort-ii/)
 
-* virtual indexing, partition: https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)%2BO(1)-after-median-Virtual-Indexing
+* virtual indexing, partition: [leetcode discuss](https://leetcode.com/problems/wiggle-sort-ii/discuss/77677/O(n)%2BO(1)-after-median-Virtual-Indexing)
 
 #### 比较性质排序
 
@@ -363,6 +373,12 @@
 
 ### 线段树 Segment Tree
 
+* Segment Tree w/ Lazy Propagation
+* [Segment tree Theory and applications](http://maratona.ic.unicamp.br/MaratonaVerao2016/material/segment_tree_lecture.pdf)
+* [A Recursive approach to Segment Trees, Range Sum Queries & Lazy Propagation](https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/)
+* [线段树（segment tree），看这一篇就够了](https://www.jianshu.com/p/6fd130084a43)
+* [线段树小结](https://blog.csdn.net/lwt36/article/details/50255129)
+
 ### 优先队列
 
 ### 计算星期几（[基姆拉尔森计算公式](https://blog.csdn.net/qq_40772692/article/details/80330346)）
@@ -402,9 +418,9 @@
 ### 模拟除法
 
 * ```c++
-  // remove sign of operands 
-  long div = dividend; 
-  long dsr = divisor; 
+  // remove sign of operands
+  long div = dividend;
+  long dsr = divisor;
   div = abs(div);
   dsr = abs(dsr);
   long long  tmp = 0;
@@ -412,8 +428,8 @@
   // 这里模拟除法运算，二进制的，从第31位一直到第0位
   for(int i = 31; i>= 0; --i) {
       if(tmp + (dsr<<i) <= div) {
-          tmp += dsr << i; 
-          quotient |= 1LL << i; 
+          tmp += dsr << i;
+          quotient |= 1LL << i;
       }
   }
   ```
@@ -422,7 +438,7 @@
 
 ### Prime Factorization 质因数分解
 
-* 
+* TODO
 
 ### Fermat's Theorem
 
@@ -433,6 +449,7 @@
 ### 牛顿法 Newton's method
 
 * 求x的平方根 `z -= (z*z - x) / (2*z)` 直到不怎么改变
+* [如何通俗易懂地讲解牛顿迭代法？](<https://blog.csdn.net/ccnt_2012/article/details/81837154>)
 
 ### 欧拉定理
 
@@ -460,7 +477,7 @@
    # 欧几里得
    def gcd (a, b):
        return a if b == 0 else gcd(b, a % b)
-   
+
    # 扩展欧几里得
    def egcd ( a , b ):
        if (b == 0):
@@ -469,7 +486,7 @@
           x , y , q = egcd( b , a % b ) # q = GCD(a, b) = GCD(b, a%b)
           x , y = y, ( x - (a // b) * y )
           return x, y, q
-    
+
   # 可以利用扩展欧几里得求逆元
   def mod_inv(a,b):
       return egcd(a,b)[0]%b #求a模b得逆元
@@ -484,7 +501,7 @@
 
 ### 杨辉三角/Pascal Triangle
 
-* 
+* TODO
 
 ### RSA
 
@@ -510,7 +527,7 @@
 * scanf
 
   * ```c
-  std::sscanf(str.c_str(), "%d:%[^:]:%d", &id, strbuf, &tstamp);
+    std::sscanf(str.c_str(), "%d:%[^:]:%d", &id, strbuf, &tstamp);
     ```
 
 * array
@@ -519,7 +536,7 @@
 
 * sstream
 
-  * 
+  * TODO
 
 * numeric
 
@@ -581,7 +598,7 @@
 
 * strlwr(char [])
 
-* strcat(char * dest, char * str)
+* strcat(char \* dest, char \* str)
 
 * strchr 查找首次出现字符的位置
 
@@ -609,7 +626,7 @@
 
   * pair在比较时按默认方式先比较T1, 再比较T2
 
-* multiset 
+* multiset
   * lower_bound 大于等于最小
   * upper_bound 小于等于最大f
   * find
@@ -687,6 +704,7 @@
     ```
 
 ---
+
 * double间的比较要通过比较差值是否达到精度要求
 * 1e3 默认是double
 
@@ -696,7 +714,6 @@
 
 ## ToDos
 
-- [ ] 9.1.1 took 500ms, To Be Optimized
-- [ ] 字符串匹配算法（判断是否为子串）[NOI/1.7编程基础之字符串/18:验证子串](http://noi.openjudge.cn/ch0107/18)
-- [ ] setprecision为何能表示很大的pow(2, n)
-- [ ] 
+* [ ] 9.1.1 took 500ms, To Be Optimized
+* [ ] 字符串匹配算法（判断是否为子串）[NOI/1.7编程基础之字符串/18:验证子串](http://noi.openjudge.cn/ch0107/18)
+* [ ] setprecision为何能表示很大的pow(2, n)
