@@ -6,7 +6,9 @@
 
 using namespace std;
 
-
+/**
+ * print arr L
+ */
 void printArr(int L[], int n) {
   for (int i = 0; i < n; i += 5) {
     for (int j = i; j < n && j < i + 5; ++j) cout << L[j] << " ";

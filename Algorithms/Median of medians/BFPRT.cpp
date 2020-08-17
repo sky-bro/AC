@@ -1,23 +1,24 @@
 #include "BFPRT.h"
+
 #include <iostream>
 
-using std::swap, std::min;
+using std::min;
+using std::swap;
 
-int partition5(int L[], int left, int right) {
-  for (int i = left + 1; i <= right; ++i) {
-    int j = i;
-    while (j > left && L[j - 1] > L[j]) {
-      swap(L[j - 1], L[j]);
-      --j;
-    }
+void select(int L[], int left, int right, int k) {
+  while (true) {
+    if (left == right) return;
+    int pivot_index = pivot(L, left, right);
+    pivot_index = partition(L, left, right, pivot_index, k);
+    if (k == pivot_index)
+      return;
+    else if (k < pivot_index)
+      right = pivot_index - 1;
+    else
+      left = pivot_index + 1;
   }
-  return (left + right) / 2;  // return middle index (the median index)
 }
 
-void select(int L[], int left, int right, int k);
-
-// the actual median-fo-medians algorithm
-// return the pivot index
 int pivot(int L[], int left, int right) {
   if (right - left < 5) return partition5(L, left, right);
   int n = right - left + 1;
@@ -36,7 +37,6 @@ int pivot(int L[], int left, int right) {
   return mid;
 }
 
-// three way partition used in select, we need the k-th smallest in select
 int partition(int L[], int left, int right, int pivot_index, int k) {
   int pivot_value = L[pivot_index];
   swap(L[pivot_index], L[right]);
@@ -62,17 +62,13 @@ int partition(int L[], int left, int right, int pivot_index, int k) {
     return store_index_eq;
 }
 
-// put k-th element at L[k] (0 indexed)
-void select(int L[], int left, int right, int k) {
-  while (true) {
-    if (left == right) return;
-    int pivot_index = pivot(L, left, right);
-    pivot_index = partition(L, left, right, pivot_index, k);
-    if (k == pivot_index)
-      return;
-    else if (k < pivot_index)
-      right = pivot_index - 1;
-    else
-      left = pivot_index + 1;
+int partition5(int L[], int left, int right) {
+  for (int i = left + 1; i <= right; ++i) {
+    int j = i;
+    while (j > left && L[j - 1] > L[j]) {
+      swap(L[j - 1], L[j]);
+      --j;
+    }
   }
+  return (left + right) / 2;  // return middle index (the median index)
 }
