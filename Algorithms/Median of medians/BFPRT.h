@@ -17,7 +17,7 @@ int pivot(int L[], int left, int right);
 int partition(int L[], int left, int right, int pivot_index, int k);
 
 /*
- * less than 5 elements, insertion sort, and pick the middle as partition index
+ * <= 5 elements, insertion sort, and pick the middle as partition index
  */
 int partition5(int L[], int left, int right);
 

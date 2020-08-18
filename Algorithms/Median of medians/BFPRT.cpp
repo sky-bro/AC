@@ -21,7 +21,6 @@ void select(int L[], int left, int right, int k) {
 
 int pivot(int L[], int left, int right) {
   if (right - left < 5) return partition5(L, left, right);
-  int n = right - left + 1;
   for (int i = left; i <= right; i += 5) {
     int sub_right = min(i + 4, right);
     int median5 = partition5(L, i, sub_right);
