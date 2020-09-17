@@ -7,13 +7,16 @@ using namespace std;
 class Solution {
  public:
   int numFriendRequests(vector<int>& ages) {
-    sort(ages.begin(), ages.end());
+    vector<int> bucket(121);
+    for (int age : ages) bucket[age]++;
+    for (int i = 1; i <= 120; ++i) bucket[i] += bucket[i - 1];
     int res = 0;
-    for (auto age : ages) {
-      auto l = upper_bound(ages.begin(), ages.end(), age / 2 + 7);
-      auto r = upper_bound(ages.begin(), ages.end(), age);
-      if (r > l) {
-        res += distance(l, r) - 1;
+    for (int i = 1; i <= 120; ++i) {
+      if (bucket[i] - bucket[i - 1]) {
+        int l_age = i / 2 + 7;
+        if (l_age < i) {
+          res += (bucket[i] - bucket[i - 1]) * (bucket[i] - bucket[l_age] - 1);
+        }
       }
     }
     return res;
