@@ -41,9 +41,9 @@ class Solution {
       for (int j = i + 1; j < n; ++j) {
         int diff = 0;
         for (int k = 0; k < len; ++k) {
-          if (A[i][k] != A[j][k]) ++diff;
+          if (A[i][k] != A[j][k] && ++diff > 2) break;
         }
-        if (diff == 0 || diff == 2) U(i, j);
+        if (diff <= 2) U(i, j);
       }
     }
     return groups;
