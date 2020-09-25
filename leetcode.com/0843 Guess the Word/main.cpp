@@ -21,9 +21,6 @@ int match(const string& a, const string& b) {
     return cnt;
 }
 
-/**
- * use random strategy, guess too many times...
- */
 class Solution {
    public:
     void findSecretWord(vector<string>& wordlist, Master& master) {
@@ -36,6 +33,7 @@ class Solution {
                     wordlist2.push_back(word);
                 }
             }
+            wordlist = wordlist2;
         }
     }
 };
