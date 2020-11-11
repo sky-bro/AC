@@ -1,11 +1,31 @@
 # My Coding Practice
 
-## The Plan
+## Current
 
 * [ ] I'm trying to finish all [leetcode](https://leetcode.com/sky_io/) (algorithm) problems the first time. (do it in the order of problem ID)
 * [ ] After that I'll review my code again by category, write/organize my documents.
+* [ ] google kickstart
 
 ## 算法&数据结构 Algorithms & Data Structures
+
+### Binary Search
+
+* [find the kth smallest element in the (sorted) matrix](https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/115819/Summary-of-solutions-for-problems-%22reducible%22-to-LeetCode-378)
+  * biselect
+    * TODO
+* median of medians
+
+### Graph 图
+
+* BFS
+  * two way BFS
+* DFS
+* Dijkstra's Algorithm
+  * heap + bfs / A*
+* Bellman Ford
+  * dp
+* Bipartite graph/network 二分图
+  * TODO
 
 ### Coordinate Compression 坐标压缩
 
@@ -78,7 +98,7 @@
 * related problems
   * [leetcode: 591. Tag Validator](https://leetcode.com/problems/tag-validator/)
 
-### Convex hull
+### 凸包 Convex hull
 
 * [Convex hull & different algorithms](http://www.csie.ntnu.edu.tw/~u91029/ConvexHull.html)
   * Graham's Scan
@@ -289,7 +309,7 @@
 * [Quick Select: 找到一对无序的数中第 **K** 大，或者第 **K** 小的元素](https://www.cnblogs.com/LinMiaoJia/p/QuickSelect.html)
 * [leetcode: 0215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
 
-### 排序
+### 排序 Sort
 
 #### 选择排序 Selection Sort
 
@@ -311,6 +331,11 @@
 #### 快速排序Quick Sort
 
 #### 希尔排序 Shell's Sort
+
+#### 拓扑排序 Topological Sort
+
+* Kahn’s algorithm, track indegree of nodes: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+* dfs + stack: https://www.geeksforgeeks.org/topological-sorting/
 
 #### [leetcode: Wiggle Sort 2](https://leetcode.com/problems/wiggle-sort-ii/)
 
@@ -436,6 +461,28 @@
 
 ## 数学 Maths
 
+### 区间，矩形 overlap
+
+* [leetcode: 836. Rectangle Overlap](https://leetcode.com/problems/rectangle-overlap/)
+
+```c++
+// for 1D:
+// left1 < right2 && left2 < right1
+
+// for 2D:
+// overlap on both x and y
+```
+
+### 点积 叉积
+
+### 点到直线距离
+
+### 三角形面积
+
+根据三点坐标求面积
+$S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \times y_3 - x_2 \times y_1 - x_3 \times y_2)$
+`S=(1/2)*(x1*y2+x2*y3+x3*y1-x1*y3-x2*y1-x3*y2)`
+
 ### Prime Factorization 质因数分解
 
 * TODO
@@ -514,6 +561,16 @@
 
 ## 记忆
 
+* 位运算
+  * b&-b可以得到最低位的1（比如2&-2=0b10）
+
+* rotate
+
+* queue
+
+  * priority_queue
+    * [C++ std::priority_queue uses the lambda expression](https://stackoverflow.com/questions/41053232/c-stdpriority-queue-uses-the-lambda-expression)
+  
 * namespace
 
   * unnamed/anonymous namespace
