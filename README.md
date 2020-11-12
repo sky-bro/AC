@@ -153,7 +153,21 @@
 
 #### 快速求组合数
 
-* [ref: 如何快速求解组合数 C(n,m) 取模 【最简单的方法】](https://blog.csdn.net/qq_41357771/article/details/79896213)
+* 法1: [ref: 如何快速求解组合数 C(n,m) 取模 【最简单的方法】](https://blog.csdn.net/qq_41357771/article/details/79896213)
+
+* 法2: 适合大组合数 / 大数处理 (更好，更简单，更快)， 但不精确
+
+> 核心就是 取对数进行运算，乘除法转为加减法
+
+对于$C(n, k) = (n!)/((n-k)!)/(k!)$
+
+等价于(这里用浮点数，可能会有精度损失): $C(n, k) = exp(log(C(n, k))) = exp(log(n!)-log((n-k)!)-log(k!))$
+
+如果结果特别大时，一般题目会让你继续用这个数和另外一个很小的数相乘(另外的这个数也用相同底的对数形式表示即可)，所以继续用对数保存(暂时不要算$exp()$); 如果直接需要这个整数结果可以将结果取整$int(x+0.5)$
+
+所以只需要提前算好$log(n!)$就好了，$log(n!)=log(1)+log(2)+...+log(n)$
+
+相关题目：[google kickstart round B, 4](https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ffc8/00000000002d8565)
 
 ### Random / Sampling
 
