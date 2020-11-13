@@ -475,6 +475,18 @@
 
 ## 数学 Maths
 
+### 距离概念 Distance
+
+* 曼哈顿距离 Manhattan Distance
+
+在欧几里德空间的固定直角坐标系上两点所形成的线段对轴产生的投影的距离总和。
+例如在平面上，坐标(x1,y1)的i点与坐标(x2,y2)的j点的曼哈顿距离为: `d(i,j)=|X1-X2|+|Y1-Y2|`
+
+* 欧式距离 Euclidean Distance
+
+指在m维空间中两个点之间的真实距离，或者向量的自然长度（即该点到原点的距离）。在二维和三维空间中的欧氏距离就是两点之间的实际距离。
+如在二维空间，`d(i,j)=sqrt((X1-X2)^2+(Y1-Y2)^2)`
+
 ### 区间，矩形 overlap
 
 * [leetcode: 836. Rectangle Overlap](https://leetcode.com/problems/rectangle-overlap/)
