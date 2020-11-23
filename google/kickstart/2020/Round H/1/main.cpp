@@ -12,7 +12,6 @@ typedef long long ll;
 void solve(int case_num) {
   ll N, K, S;
   cin >> N >> K >> S;
-
   ll res = min(K + (K - S) + (N - S), K + N);
   cout << res << "\n";
 }

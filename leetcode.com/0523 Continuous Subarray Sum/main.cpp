@@ -18,6 +18,7 @@ class Solution {
       return false;
     } else if (k < 0)
       k = -k;  // not necessary
+    // could just use unordered_map<int, int>
     unordered_map<int, unordered_set<int>> dp;
     dp[nums[0] %= k].insert(0);
     dp[0].insert(-1);

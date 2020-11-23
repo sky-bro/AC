@@ -41,3 +41,30 @@ public:
         return true;
     }
 };
+
+/*
+class Solution {
+private:
+    bool dfs(vector<vector<int>>& g, vector<char>& vis, int idx) {
+        if (vis[idx] == 2) {return false;}
+        vis[idx] = 2;
+        for (int i : g[idx]) {
+            if (!dfs(g, vis, i)) {return false;}
+        }
+        vis[idx] = 1;
+        return true;
+    }
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> g(numCourses, vector<int>());
+        vector<char> vis(numCourses, 0);
+        for (auto pre : prerequisites) {
+            g[pre[1]].push_back(pre[0]);
+        }
+        for (int i = 0; i < numCourses; ++i) {
+            if (vis[i] == 0 && !dfs(g, vis, i)) {return false;}
+        }
+        return true;
+    }
+};
+*/

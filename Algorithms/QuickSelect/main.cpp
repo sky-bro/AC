@@ -36,7 +36,7 @@ int quickSelect(vector<int> &arr, int l, int r, int k) {
 int quickSelect2(vector<int> &arr, int l, int r, int k) {
   if (l == r) return arr[l];
   int pivot = arr[(l + r) / 2];
-  int ll = l - 1, rr = r - 1;
+  int ll = l - 1, rr = r + 1;
   while (true) {
     do
       ++ll;

@@ -20,31 +20,18 @@ public:
             segment_tree[i] = segment_tree[i<<1] + segment_tree[i<<1|1];
         }
     }
-    
     void update(int i, int val) {
         i += n;
         if (segment_tree[i] == val) return;
-        segment_tree[i] = val;
-        while (i > 1) {
-            i >>= 1;
-            segment_tree[i] = segment_tree[i<<1] + segment_tree[i<<1|1];
+        for (segment_tree[i] = val; i > 1; i >>= 1) {
+            segment_tree[i>>1] = segment_tree[i] + segment_tree[i^1];
         }
     }
-    
-    int sumRange(int i, int j) {
+    int sumRange(int i, int j) { // sum range [i, j]
         int sum = 0;
-        j += 1;
-        i += n; j += n;
-        while (i < j) {
-            if (i&1) {
-                sum += segment_tree[i];
-                ++i;
-            }
-            if (j&1) {
-                --j;
-                sum += segment_tree[j];
-            }
-            i >>= 1; j >>= 1;
+        for (i += n, j += n+1; i < j; i >>= 1, j >>= 1) {
+            if (i&1) sum += segment_tree[i++];
+            if (j&1) sum += segment_tree[--j];
         }
         return sum;
     }

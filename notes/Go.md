@@ -424,4 +424,68 @@
       p.X = 1e9 // no need to use (*p).X
       ```
 
-  * 
+* **Methods**
+
+  * Go does not have classes. However, you can define methods on types.
+
+  * a method is a function, with a special **receiver argument** (between `func` keyword and method name)
+
+  * ```go
+    type Vertex struct {
+    	X, Y float64
+    }
+    
+    func (v Vertex) Abs() float64 {
+    	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+    }
+    ```
+
+  * You can only declare a method with a receiver whose type is defined in the same package as the method.
+
+    * ```go
+      type MyFloat float64
+      // func (f float64) Abs() float64 {}, wrong!
+      func (f MyFloat) Abs() float64 {
+      	// ...
+      }
+      ```
+
+  * **Pointer receivers** and **Value receivers**
+
+    * Methods with pointer receivers can modify the value to which the receiver points 
+    * often need to modify their receiver, pointer receivers are more common
+    * with value receiver, operates on a copy of the original
+    * two reasons to **use a pointer receiver**
+      * the first is so that the method can **modify the value** that its receiver points to
+      * **avoid copying** the value on each method call
+      * In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both
+
+  * Methods and pointer **indirection**
+
+    * functions with a **pointer/value argument** must take a **pointer/value**
+
+    * methods with **pointer/value receivers** take either a **value** or a **pointer** as the receiver when they are called
+
+    * ```go
+      var v Vertex
+      
+      // pointer argument/receiver
+      ScaleFunc(v, 5)  // Compile error!
+      ScaleFunc(&v, 5) // OK
+      
+      v.Scale(5)  // OK
+      p := &v
+      p.Scale(10) // OK
+      
+      // value argument/receiver
+      fmt.Println(AbsFunc(v))  // OK
+      fmt.Println(AbsFunc(&v)) // Compile error!
+      
+      fmt.Println(v.Abs()) // OK
+      p := &v
+      fmt.Println(p.Abs()) // OK
+      ```
+
+* **Interfaces**
+
+  * http://127.0.0.1:3999/methods/9
