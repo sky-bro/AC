@@ -9,9 +9,9 @@ static int x = []() {
 }();
 typedef long long ll;
 
-clock_t starttime, endtime;
+// clock_t starttime, endtime;
 class Node {
-public:
+ public:
   Node *l, *r;
   Node(Node *l = nullptr, Node *r = nullptr) : l(l), r(r) {}
   ~Node() {
@@ -22,39 +22,36 @@ public:
     Node *p = this;
     for (int i = 29; i >= 0; --i) {
       if (num & (1 << i)) {
-        if (!p->r)
-          p->r = new Node();
+        if (!p->r) p->r = new Node();
         p = p->r;
       } else {
-        if (!p->l)
-          p->l = new Node();
+        if (!p->l) p->l = new Node();
         p = p->l;
       }
     }
   }
 };
 
+// O(30m+30n)
 class Solution {
-public:
+ public:
   vector<int> maximizeXor(vector<int> &nums, vector<vector<int>> &queries) {
-    starttime = clock();
+    // starttime = clock();
     int n = queries.size(), m = nums.size();
     sort(nums.begin(), nums.end());
     vector<array<int, 3>> qq(n);
-    for (int i = 0; i < n; ++i)
-      qq[i] = {queries[i][1], queries[i][0], i};
+    for (int i = 0; i < n; ++i) qq[i] = {queries[i][1], queries[i][0], i};
     sort(qq.begin(), qq.end());
     vector<int> res(n, -1);
     Node *root = new Node();
     int I = 0;
-    for (int i = 0; i < n; ++i) { //
+    for (int i = 0; i < n; ++i) {
       auto &v = qq[i];
-      while (I < m && nums[I] <= v[0]) { // O(31m)
+      while (I < m && nums[I] <= v[0]) {
         root->insert(nums[I]);
         ++I;
       }
-      if (!I)
-        continue;
+      if (!I) continue;
       int mx = 0;
       Node *p = root;
       for (int i = 29; i >= 0; --i) {
@@ -76,15 +73,15 @@ public:
       }
       res[v[2]] = mx;
     }
-    endtime = clock();
-    cout << "took: " << (double)(endtime - starttime) / CLOCKS_PER_SEC << endl;
+    // endtime = clock();
+    // cout << "took: " << (double)(endtime - starttime) / CLOCKS_PER_SEC << endl;
     return res;
   }
 };
 
-template <typename T> void printArr(const vector<T> &arr) {
-  for (const T &t : arr)
-    cout << t << " ";
+template <typename T>
+void printArr(const vector<T> &arr) {
+  for (const T &t : arr) cout << t << " ";
   cout << "\n";
 }
 
