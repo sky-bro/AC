@@ -25,7 +25,16 @@
 * Bellman Ford
   * dp
 * Bipartite graph/network 二分图
-  * TODO
+  * 匹配,最大匹配 (maximal matching problem),完全匹配/完备匹配
+    * 增广路径: 若P是图G中一条连通两个未匹配顶点的路径，并且属M的边和不属M的边（即已匹配和待匹配的边）在P上交替出现，则称P为相对于M的一条增广路径
+      * P的路径长度必为奇数,第一条和最后一条边都不属于M
+      * P经过取反操作可以得到一个更大的匹配M'
+      * M为G的最大匹配当且仅当不存在相对于M的增广路径
+    * 利用增广路径求**最大匹配**(匈牙利算法 Hungary: 求无边权二分图的最大匹配) TODO
+    * KM算法：带权二分图的最大权完美匹配 TODO
+  * leetcode 0886: 就是判断是不是二分图
+    * 用染色法解决
+* 网络流算法
 
 ### Coordinate Compression 坐标压缩
 
@@ -408,15 +417,77 @@
 
 ### [康托展开和逆康托展开](https://blog.csdn.net/wbin233/article/details/72998375)
 
-### 树状数组 Binary Indexed Tree
+### LCS (longest common sequence)
+
+### LIS (longest increasing sequence)
+
+### 树状数组 Binary Indexed Tree (BIT) / Fenwick Tree
+
+```c++
+int n;
+vector<int> A;
+
+template <typename T>
+void printArr(const vector<T> &arr) {
+  for (const T &t : arr) cout << t << " ";
+  cout << endl;
+}
+
+int sum(int i) {  // A[1] + A[2] + ... + A[i]
+  int res = 0;
+  while (i) res += A[i], i -= i & -i;
+  return res;
+}
+
+void add(int i, int k) {  // adds k to A[i]
+  while (i <= n) A[i] += k, i += i & -i;
+}
+
+int main(int argc, char const *argv[]) {
+  cout << "input the number of elements to be added, n: ";
+  cin >> n;
+  A.resize(n + 1);
+  for (int i = 1; i <= n; ++i) {
+    cin >> A[0];
+    add(i, A[0]);
+  }
+//   printArr(A);
+  while (1) {
+    cout << "get sum of first x elements, x: ";
+    int x;
+    cin >> x;
+    if (x > 0 && x <= n)
+      cout << "sum of first " << x << " elements is " << sum(x) << endl;
+    else
+      break;
+  }
+  return 0;
+}
+```
+
+* [关于线段树(Segment tree)和树状数组(BIT)的区别？](https://www.zhihu.com/question/54746883?sort=created)
+* [wiki: Fenwick tree](https://en.wikipedia.org/wiki/Fenwick_tree)
 
 ### 线段树 Segment Tree
 
-* Segment Tree w/ Lazy Propagation
+* Segment Tree w/ Lazy Propagation (TODO)
+* [Segment Tree (Iterative)](https://sky-bro.github.io/en/posts/segment-tree-iterative/)
 * [Segment tree Theory and applications](http://maratona.ic.unicamp.br/MaratonaVerao2016/material/segment_tree_lecture.pdf)
 * [A Recursive approach to Segment Trees, Range Sum Queries & Lazy Propagation](https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/)
 * [线段树（segment tree），看这一篇就够了](https://www.jianshu.com/p/6fd130084a43)
 * [线段树小结](https://blog.csdn.net/lwt36/article/details/50255129)
+
+### Li-Chao Segment Tree
+
+* [【博客】李超线段树初步](https://ac.nowcoder.com/discuss/180365)
+* [李超线段树 (Li-Chao Segment Tree)](https://www.cnblogs.com/JHSeng/p/10896570.html)
+
+### dominator tree
+
+### Palindromic Tree
+
+* [Palindromic tree: behind the scenes](https://codeforces.com/blog/entry/13959)
+* [回文串问题的克星——Palindrome Tree（回文树）/Palindrome Automaton（回文自动机）学习小记](https://blog.csdn.net/qq_36551189/article/details/79245675)
 
 ### 优先队列
 
@@ -474,6 +545,10 @@
   ```
 
 ## 数学 Maths
+
+### bit manipulation
+
+* `x&(-x)`计算第一个非0位对应的权值(如`2&(-2)=2`, `7&(-7)=1`, `6&(-6)=2`)
 
 ### 距离概念 Distance
 
@@ -701,9 +776,9 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 
 * binary_search 找到返回true
 
-* lower_bound(begin, end, num) 大于等于num（指针）
+* lower_bound(begin, end, num) 第一个不小于num的指针
 
-* upper_bound(begin, end, num) 大于num（指针）
+* upper_bound(begin, end, num) 第一个大于num的指针
 
 * pair<T1, T2>
 
@@ -794,6 +869,13 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 ## LINKS
 
 * [50题（ACM学习推荐题）](https://blog.csdn.net/jiangX1994/article/details/38019519)
+* [topcoder: Competitive Programming Tutorials](https://www.topcoder.com/community/competitive-programming/tutorials/)
+* [E-Maxx Algorithms in English](https://cp-algorithms.com/)
+
+### my profiles
+
+* [codeforces](https://codeforces.com/profile/sky_io)
+* [leetcode](https://leetcode.com/sky_io)
 
 ## ToDos
 
