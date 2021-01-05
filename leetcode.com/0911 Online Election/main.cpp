@@ -7,6 +7,8 @@
 
 using namespace std;
 
+// to optimize: we only need to know the current winner, then decide if we need
+// to update that, so no pq is needed
 class TopVotedCandidate {
  private:
   vector<pair<int, int>> v;
