@@ -17,22 +17,7 @@ class UF {
     cnts.resize(n, 1);
   }
 
-  int F(int x) {
-    int p = x;
-    while (p != ids[p]) {
-      p = ids[p];
-    }
-
-    // 优化，路径压缩，将x到根节点路径上所有节点的父亲（id）全部改成根节点
-    int p2 = x;
-    while (ids[p2] != p) {
-      int next_p2 = ids[p2];
-      ids[p2] = p;
-      p2 = next_p2;
-    }
-
-    return p;
-  }
+  int F(int x) { return ids[x] == x ? x : (ids[x] = F(ids[x])); }
 
   void U(int p, int q) {
     int pid = F(p), qid = F(q);
