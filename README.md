@@ -357,8 +357,9 @@
 
 #### 拓扑排序 Topological Sort
 
-* Kahn’s algorithm, track indegree of nodes: https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
-* dfs + stack: https://www.geeksforgeeks.org/topological-sorting/
+* [Kahn’s algorithm, track indegree of nodes](https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/)
+* [dfs + stack](https://www.geeksforgeeks.org/topological-sorting/)
+* [All Topological Sorts](https://www.geeksforgeeks.org/all-topological-sorts-of-a-directed-acyclic-graph/)
 
 #### [leetcode: Wiggle Sort 2](https://leetcode.com/problems/wiggle-sort-ii/)
 
@@ -546,6 +547,10 @@ int main(int argc, char const *argv[]) {
 
 ## 数学 Maths
 
+### 模运算
+
+* `a/(b*c) % p = a * b^-1 * c^-1`
+
 ### bit manipulation
 
 * `x&(-x)`计算第一个非0位对应的权值(如`2&(-2)=2`, `7&(-7)=1`, `6&(-6)=2`)
@@ -647,6 +652,12 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 * [中国剩余定理算法详解(余数互质和不互质）](https://blog.csdn.net/Dafang_Xu/article/details/50818919)
 * [中国剩余定理算法详解（互质与不互质情况）](https://blog.csdn.net/codeswarrior/article/details/81056425)
 
+### 求逆元
+
+拓展欧几里得，费马小定理(欧拉定理特例)，线性法
+
+* [【同余定理+逆元】知识点讲解](https://blog.csdn.net/LOOKQAQ/article/details/81282342)
+
 ### 杨辉三角/Pascal Triangle
 
 * TODO
@@ -661,6 +672,8 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 * [C++ split分割字符串函数](https://www.cnblogs.com/dingxiaoqiang/p/8228390.html)
 
 ## 记忆
+
+* partial_sum
 
 * 位运算
   * b&-b可以得到最低位的1（比如2&-2=0b10）
@@ -868,9 +881,21 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 
 ## LINKS
 
-* [50题（ACM学习推荐题）](https://blog.csdn.net/jiangX1994/article/details/38019519)
+### algo / tutorial
+
 * [topcoder: Competitive Programming Tutorials](https://www.topcoder.com/community/competitive-programming/tutorials/)
 * [E-Maxx Algorithms in English](https://cp-algorithms.com/)
+* [web.ntnu.edu.tw/~algo](http://web.ntnu.edu.tw/~algo/)
+* [labuladong 的算法教程](https://labuladong.gitbook.io/algo/)
+
+### template
+
+* [Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook](https://github.com/Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook)
+
+### problems
+
+* [50题（ACM学习推荐题）](https://blog.csdn.net/jiangX1994/article/details/38019519)
+* [AcWing在线题库](https://www.acwing.com/problem/)
 
 ### my profiles
 
