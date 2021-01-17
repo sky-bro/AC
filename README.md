@@ -554,6 +554,59 @@ int main(int argc, char const *argv[]) {
 ### bit manipulation
 
 * `x&(-x)`计算第一个非0位对应的权值(如`2&(-2)=2`, `7&(-7)=1`, `6&(-6)=2`)
+* `x = a ^ (a << 13)`/`x = a ^ (a >> 13)`，知道x求a的值，`a, x`都是64位无符号整数
+
+```c++
+#include <iostream>
+#include <vector>
+
+using namespace std;
+typedef unsigned long long ull;
+ull e(ull a1) {
+  ull a = a1 ^ (a1 << 7), b = a ^ ((a) >> 11), c = b ^ ((b) << 31);
+  return c ^ ((c) >> 13);
+}
+
+// most left part not changed: a ^ (a >> 13)
+// most right part not changed: a ^ (a << 13)
+ull f(ull x, int len, bool left) {
+  ull mask;
+  if (left) {
+    mask = ((1ull << len) - 1) << (64 - len);
+    for (int i = len; i < 64; i += len) {
+      ull m = mask >> i;
+      x = (x & (~m)) | (m & ((x >> len) ^ x));
+    }
+  } else {
+    mask = (1ull << len) - 1;
+    for (int i = len; i < 64; i += len) {
+      ull m = mask << i;
+      x = (x & (~m)) | (m & ((x << len) ^ x));
+    }
+  }
+  return x;
+}
+
+ull d(ull res) {
+  res = f(res, 13, true);
+  res = f(res, 31, false);
+  res = f(res, 11, true);
+  res = f(res, 7, false);
+  return res;
+}
+
+int main(int argc, char const *argv[]) {
+  ull x;
+  cin >> x;
+  cout << x << endl;
+  ull y = x ^ (x >> 13);
+  cout << y << endl;
+  cout << f(y, 13, true) << endl;
+  //   cout << e(x) << endl;
+  //   cout << d(e(x)) << endl;
+  return 0;
+}
+```
 
 ### 距离概念 Distance
 
