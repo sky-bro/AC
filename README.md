@@ -554,6 +554,19 @@ int main(int argc, char const *argv[]) {
 ### bit manipulation
 
 * `x&(-x)`计算第一个非0位对应的权值(如`2&(-2)=2`, `7&(-7)=1`, `6&(-6)=2`)
+* 枚举子集
+
+```c++
+// n 最多取到14, 15
+// 复杂度为O(3^n)
+for (int i = 1; i < (1 << n); ++i) {
+  cout << bitset<32>(i) << ":\n";
+  for (int j = i; j; j=(j-1)&i) {
+    cout << "\t" << bitset<32>(j) << endl;
+  }
+}
+```
+
 * `x = a ^ (a << 13)`/`x = a ^ (a >> 13)`，知道x求a的值，`a, x`都是64位无符号整数
 
 ```c++
