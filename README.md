@@ -334,6 +334,8 @@
 
 ### 排序 Sort
 
+> [LeetCode 力扣官方分享 | 2 分钟带你掌握 10 种排序算法](https://www.zhihu.com/zvideo/1314875094616023040)
+
 #### 选择排序 Selection Sort
 
 * 每次选择最小的元素排好
@@ -514,7 +516,7 @@ int main(int argc, char const *argv[]) {
 * ```c++
   template <typename T>
   T pow(T x, int n) {
-    int ret = 1;
+    T ret = 1;
     while (n) {
       if (n & 1) { // 按位与比n%2更快
         ret *= x;
@@ -546,6 +548,60 @@ int main(int argc, char const *argv[]) {
   ```
 
 ## 数学 Maths
+
+### Matrix
+
+* ref: [Matrix - By DanAlex](https://codeforces.com/blog/entry/21189)
+
+```c++
+template <typename T, std::size_t R, std::size_t C = R,
+          std::size_t M = INT32_MAX>
+class Matrix {
+ public:
+  T m[R][C];
+
+  Matrix() { memset(m, 0, sizeof(m)); }
+  /**
+   * construct a matrix whose diagonal (fill at most min(R, C) number as x) is
+   * filled with number x, and the rest filled with 0's
+   * @param x number to be filled at the diagonal
+   * @param isMainDiagonal fill main diagonal if true, else fill the
+   * antidiagonal
+   */
+  Matrix(T x, bool isMainDiagonal = true) : Matrix() {
+    if (isMainDiagonal)
+      for (std::size_t i = 0; i < R && i < C; ++i) m[i][i] = x;
+    else
+      for (std::size_t i = 0, j = C - 1; i < R && j >= 0; --j, ++i) m[i][j] = x;
+  }
+
+  template <std::size_t C2>
+  Matrix<T, R, C2, M> operator*(const Matrix<T, C, C2, M> &other) const {
+    Matrix<T, R, C2, M> res;
+    for (std::size_t i = 0; i < R; ++i)
+      for (std::size_t k = 0; k < C; ++k)
+        for (std::size_t j = 0; j < C2; ++j)
+          res.m[i][j] = (res.m[i][j] + m[i][k] * other.m[k][j] % M) % M;
+    return res;
+  }
+
+  Matrix<T, R, C, M> &operator*=(const Matrix<T, C, C, M> &other) {
+    return *this = *this * other;
+  }
+
+  void fill(T x) {
+    for (std::size_t i = 0; i < R; ++i)
+      for (std::size_t j = 0; j < C; ++j) m[i][j] = x;
+  }
+
+  T sum() const {
+    T res = 0;
+    for (std::size_t i = 0; i < R; ++i)
+      for (std::size_t j = 0; j < C; ++j) res = (res + m[i][j]) % M;
+    return res;
+  }
+};
+```
 
 ### 模运算
 
