@@ -4,20 +4,13 @@
 
 using namespace std;
 
+// about rolling hash:
+// https://en.wikipedia.org/wiki/Rolling_hash#Polynomial_rolling_hash
+
 typedef long long ll;
 const ll base = 27;
 const int MOD = 1e9 + 7;
 
-// rolling hash ?
-// lowercase letters: 1-26
-// base: 27
-// mod: 1e9 + 7
-
-// target: aabcaca
-// stamp:  abca
-//         a????ca 1
-//         ?????ca 0
-//         ??????? 3
 class Solution {
  private:
   bool ok;
@@ -25,17 +18,24 @@ class Solution {
   vector<int> res;
   vector<ll> hash_prefix, hash_suffix;
   // use rolling hash to find prefix or suffix
-  void f(const string &s, string &t, int l, int r) {
+  // three cases:
+  // ???[a]bc[?]??
+  //     l    r
+  // [a]bc[?]??
+  //  0    r
+  // ???abc[\0]
+  //    l   r
+  void f(const string &s, const string &t, int l, int r) {
     int len = r - l;
-    //   bool found = false;
     // search for max suffix of s
     if (l != 0) {  // l->r
       int mx = 0;
       ll hash = 0;
-      for (int cur = 0; cur < len && cur < n1; ++cur) {
-        hash = (hash * base % MOD + t[l + cur] - 'a') % MOD;
+      for (int cur = 1; cur <= len && cur <= n1; ++cur) {
+        hash = (hash * base % MOD + t[l + cur - 1] - 'a') % MOD;
         if (hash_suffix[cur] == hash) {
-          mx = cur + 1;
+          mx = cur;
+          break;
         }
       }
       if (mx) {
@@ -51,10 +51,11 @@ class Solution {
     if (r != n2) {  // from r->l
       int mx = 0;
       ll hash = 0;
-      for (int cur = 0; cur < len && cur < n1; ++cur) {
-        hash = (hash * base % MOD + t[r - 1 - cur] - 'a') % MOD;
+      for (int cur = 1; cur <= len && cur <= n1; ++cur) {
+        hash = (hash * base % MOD + t[r - cur] - 'a') % MOD;
         if (hash_prefix[cur] == hash) {
-          mx = cur + 1;
+          mx = cur;
+          break;  // doesn't matter if it's the longest prefix or suffix
         }
       }
       if (mx) {
@@ -78,12 +79,13 @@ class Solution {
     ok = true;
     res.clear();
     n1 = stamp.size(), n2 = target.size();
-    hash_prefix.resize(n1), hash_suffix.resize(n1);
-    for (ll hash_p = 0, hash_s = 0, b = 1, i = 0; i < n1;
-         b = (b * base) % MOD, ++i) {
-      hash_prefix[i] = hash_p = (hash_p + b * (stamp[i] - 'a') % MOD) % MOD;
-      hash_suffix[i] = hash_s =
-          (hash_s + b * (stamp[n1 - 1 - i] - 'a') % MOD) % MOD;
+    hash_prefix.resize(n1 + 1), hash_suffix.resize(n1 + 1);
+    hash_prefix[0] = hash_suffix[0] = 0;
+    for (ll b = 1, i = 1; i <= n1; b = (b * base) % MOD, ++i) {
+      hash_prefix[i] =
+          (hash_prefix[i - 1] + b * (stamp[i - 1] - 'a') % MOD) % MOD;
+      hash_suffix[i] =
+          (hash_suffix[i - 1] + b * (stamp[n1 - i] - 'a') % MOD) % MOD;
     }
     // use kmp find all stamps first
     // or not, just use string.find
