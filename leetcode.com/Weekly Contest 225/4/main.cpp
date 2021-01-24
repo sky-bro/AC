@@ -13,7 +13,6 @@ class Solution {
  public:
   int minimumBoxes(int n) {
     ll sum = 1, base = 1, row = 1;
-
     while (sum < n) {
       base += (++row);
       sum += base;
