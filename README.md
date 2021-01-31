@@ -2,17 +2,20 @@
 
 ## Current
 
-* [ ] I'm trying to finish all [leetcode](https://leetcode.com/sky_io/) (algorithm) problems the first time. (do it in the order of problem ID)
-* [ ] After that I'll review my code again by category, write/organize my documents.
-* [ ] google kickstart
+* [my leetcode](https://leetcode.com/sky_io/), just reached 1000+ problems, now I'll maily do the contests problems, and do practices on codeforces.
+* [my codeforces](https://codeforces.com/profile/sky_io), still a newbie, think now it's better for me to practice on codeforces instead of leetcode.
+* [google kickstart](https://codingcompetitions.withgoogle.com/kickstart)
+  * [ ] [2020](https://codingcompetitions.withgoogle.com/kickstart/archive/2020)
+  * [ ] [2019](https://codingcompetitions.withgoogle.com/kickstart/archive/2019)
+  * [ ] [2018](https://codingcompetitions.withgoogle.com/kickstart/archive/2018)
+  * [ ] [2017](https://codingcompetitions.withgoogle.com/kickstart/archive/2017)
 
-## 算法&数据结构 Algorithms & Data Structures
+s## 算法&数据结构 Algorithms & Data Structures
 
 ### Binary Search
 
 * [find the kth smallest element in the (sorted) matrix](https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/115819/Summary-of-solutions-for-problems-%22reducible%22-to-LeetCode-378)
-  * biselect
-    * TODO
+  * biselect: [SELECTION IN X + Y，二维数组的Top K问题](https://www.jianshu.com/p/02671f92cca3)
 * median of medians
 
 ### Graph 图
@@ -996,7 +999,7 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
     }
     ```
 
----
+## Pitfalls
 
 * double间的比较要通过比较差值是否达到精度要求
 * 1e3 默认是double
@@ -1018,14 +1021,3 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
 
 * [50题（ACM学习推荐题）](https://blog.csdn.net/jiangX1994/article/details/38019519)
 * [AcWing在线题库](https://www.acwing.com/problem/)
-
-### my profiles
-
-* [codeforces](https://codeforces.com/profile/sky_io)
-* [leetcode](https://leetcode.com/sky_io)
-
-## ToDos
-
-* [ ] 9.1.1 took 500ms, To Be Optimized
-* [ ] 字符串匹配算法（判断是否为子串）[NOI/1.7编程基础之字符串/18:验证子串](http://noi.openjudge.cn/ch0107/18)
-* [ ] setprecision为何能表示很大的pow(2, n)
