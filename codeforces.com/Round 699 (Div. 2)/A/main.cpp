@@ -30,40 +30,26 @@ typedef long double ld;
 #define sz(x) (int((x).size()))
 #define data _data
 
-void run_case() {
-    int x, y;
-    string s;
+char s[100005];
+
+bool run_case() {
+    int x, y, l = 0, r = 0, u = 0, d = 0;
     cin >> x >> y >> s;
-    int u=0, d=0, l=0, r=0;
-    for (char c: s) {
-        switch (c)
-        {
-        case 'R':
-            ++r;
-            break;
-        case 'U':
-            ++u;
-            break;
-        case 'L':
-            ++l;
-            break;
-        case 'D':
-            ++d;
-            break;
-        }
+
+    for (int i = 0; s[i]; ++i) {
+        if (s[i] == 'L') --l;
+        else if (s[i] == 'R') ++r;
+        else if (s[i] == 'U') ++u;
+        else --d;
     }
-    if (x > 0) x = max(0, x-r);
-    else x = min(0, x + l);
-    if (y > 0) y = max(0, y-u);
-    else y = min(0, y + d);
-    cout << ((x==0 && y == 0) ? "YES" : "NO") << endl;
+    return x <= r && x >= l && y >= d && y <= u;
 }
 
 int main(int argc, char const *argv[]) {
     int T;
     cin >> T;
     while (T--) {
-        run_case();
+        cout << (run_case() ? "YES\n" : "NO\n");
     }
     return 0;
 }
