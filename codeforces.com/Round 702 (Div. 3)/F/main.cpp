@@ -34,34 +34,26 @@ const int N = 2e5+5;
 void run_case() {
     int n;
     cin >> n;
-    unordered_map<int,int> cnts;
+    map<int,int> cnts;
     int x;
     for (int i = 0; i < n; ++i) {
         cin >> x;
         ++cnts[x];
     }
-    vector<ll> A, SUM;
-    A.reserve(cnts.size());
-    SUM.reserve(cnts.size());
+    int S = cnts.size();
+    vector<int> cnt_sort(n+1);
     for (auto &p: cnts) {
-        A.push_back(p.second);
+        ++cnt_sort[p.second];
     }
-    sort(A.begin(), A.end());
-    ll S = 0;
+
     ll res = n;
-    n = A.size();
-    SUM.push_back(A[0]);
-    for (int i = 1; i < n; ++i) {
-        SUM.push_back(A[i] + SUM[i-1]);
-    }
-    for (int i = 0; i < n; ++i) {
-        ll cur = S + (SUM[n-1] - SUM[i] - A[i]*(n-1-i));
-        S += A[i];
+    int vis_cnt = 0;
+    for (ll i = 1; i <= n; ++i) if (cnt_sort[i]) {
+        ll cur = n - i*(S-vis_cnt);
+        vis_cnt += cnt_sort[i];
         res = min(cur, res);
     }
     cout << res << endl;
-
-
 }
 
 int main(int argc, char const *argv[]) {
