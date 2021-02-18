@@ -196,6 +196,7 @@ typedef long double ld;
 * unordered_map
 
   * 不用排序，比map快
+  * 可能有坑，最坏复杂度是$O(n^2)$，因为可能出现collision，尤其是在codeforces上可能被别人hack。而map则固定最坏是$nlog(n)$。所以时间限制如果允许就直接用map就好了，不然可以自定义hash函数，增加点随机量，参考[neal's blog: Blowing up unordered_map, and how to stop getting hacked on it](https://codeforces.com/blog/entry/62393)
 
 * max_element
 
