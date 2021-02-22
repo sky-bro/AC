@@ -29,6 +29,7 @@
 
 * [Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook](https://github.com/Jinkela-Xiao-Zuan-Feng-Mountaineer/Codebook)
 * 我的[vscode cpp snippets](https://github.com/sky-bro/.dotfiles/blob/master/.config/Code/User/snippets/cpp.json)
+  ![vscode snippets example](images/vscode-snippets.gif)
 
 ### problems
 
