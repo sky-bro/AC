@@ -740,6 +740,8 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
   * 也就有了扩展欧几里得用来求逆元：a的逆元（模b下）是x%b （因为x可能为负数）
   * [ref: 扩展欧几里得算法详解](https://blog.csdn.net/destiny1507/article/details/81750874)
   
+* c++17中的numeric头文件中已经包含有gcd和lcm函数
+
 * ```python
    # 欧几里得
    def gcd (a, b):
@@ -757,6 +759,40 @@ $S=\frac{1}{2} \times (x_1\times y_2 + x_2 \times y_3 + x_3 \times y_1 - x_1 \ti
   # 可以利用扩展欧几里得求逆元
   def mod_inv(a,b):
       return egcd(a,b)[0]%b #求a模b得逆元
+  ```
+
+  ```c++
+  int gcd(int a, int b) {
+      return b == 0 ? a : gcd(b, a % b);
+  }
+
+  int egcd(int a, int b, int &x, int &y) {
+      if (b == 0) {
+          x = 1;
+          y = 0;
+          return a;
+      }
+      int nx, ny;
+      // b*nx + a%b*ny = q
+      int q = egcd(b, a % b, nx, ny);
+      //   a*x + b*y
+      // = a*ny + b*nx - b*(a/b)*ny
+      // = b*nx + (a - b*(a/b))*ny
+      // = b*nx + a%b*ny
+      // = q
+      x = ny;
+      y = nx - (a / b) * ny;
+      return q;
+  }
+
+  /**
+   * @returns (x % b + b) % b where a*x + by = gcd(a, b)
+  */
+  int mod_inv(int a, int b) {
+      int x, y;
+      egcd(a, b, x, y);
+      return (x % b + b) % b; // possible that x < 0
+  }
   ```
 
 * [ ] 非递归扩展欧几里得算法？[ref: 扩展欧几里得](https://blog.csdn.net/m0_37953323/article/details/79734683)
