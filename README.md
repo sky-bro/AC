@@ -20,10 +20,14 @@
 
 ### algo / tutorial
 
+* [oi wiki](https://oi-wiki.org/)
 * [topcoder: Competitive Programming Tutorials](https://www.topcoder.com/community/competitive-programming/tutorials/)
 * [E-Maxx Algorithms in English](https://cp-algorithms.com/)
 * [web.ntnu.edu.tw/~algo](http://web.ntnu.edu.tw/~algo/)
 * [labuladong 的算法教程](https://labuladong.gitbook.io/algo/)
+* search "Gym algorithm" in codeforces
+  * [Algorithm Gym :: Data structures](https://codeforces.com/blog/entry/15729)
+  * [Algorithm Gym :: Graph Algorithms](https://codeforces.com/blog/entry/16221)
 
 ### template
 
@@ -35,3 +39,4 @@
 
 * [50题（ACM学习推荐题）](https://blog.csdn.net/jiangX1994/article/details/38019519)
 * [AcWing在线题库](https://www.acwing.com/problem/)
+* [洛谷/模板](https://www.luogu.com.cn/problem/list?keyword=%E6%A8%A1%E6%9D%BF&page=1)
