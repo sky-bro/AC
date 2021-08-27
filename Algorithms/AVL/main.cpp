@@ -11,14 +11,13 @@ namespace AVL
     {
         KT key;
         VT val;
-        Node *left, *right;
+        Node<KT, VT> *left, *right;
         int height;
         Node(const KT &_key, const VT &_val, Node *_left = nullptr, Node *_right = nullptr, int _height = 0)
             : key(_key), val(_val), left(_left), right(_right), height(_height) {}
-        void freeme() {
-            if (left) left->freeme();
-            if (right) right->freeme();
-            delete this;
+        ~Node() {
+            if (left) delete left;
+            if (right) delete right;
         }
     };
 
@@ -54,7 +53,7 @@ namespace AVL
     
     template<typename KT, typename VT>
     Tree<KT, VT>::~Tree() {
-        if (root) root->freeme();
+        if (root) delete root;
     }
 
     template<typename KT, typename VT>
@@ -79,10 +78,10 @@ namespace AVL
     pair<bool, Node<KT, VT>*> Tree<KT, VT>::insert(const KT &key, const VT &val, Node<KT, VT>* &node) {
         if (!node) return make_pair(true, node = new Node(key, val));
         pair<bool, Node<KT, VT>*> pp(false, node);
-        if (node->key == key) node->val = val;
+        if (node->key == key) node->val = val; // update value of key
         else if (node->key < key) pp = insert(key, val, node->right);
         else pp = insert(key, val, node->left);
-        if (pp.first) rotate(node);
+        if (pp.first) rotate(node); // ?
         return pp;
     }
 
@@ -108,6 +107,7 @@ namespace AVL
             rotate(node);
         } else {
             Node<KT, VT>* tmp = node->left ? node->left : node->right;
+            node->left = node->right = nullptr;
             delete node;
             node = tmp;
         }
@@ -125,7 +125,7 @@ namespace AVL
     }
 
     /**
-     * RR type
+     * RR type, LR type
      */
     template<typename KT, typename VT>
     void Tree<KT, VT>::rotateLeft(Node<KT, VT>* &node) {
@@ -138,7 +138,7 @@ namespace AVL
     }
 
     /**
-     * LL type
+     * LL type, RL type
      */
     template<typename KT, typename VT>
     void Tree<KT, VT>::rotateRight(Node<KT, VT>* &node) {
